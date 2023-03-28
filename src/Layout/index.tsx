@@ -1,14 +1,15 @@
 import { ReactNode } from "react";
+import { Header } from "./Header";
 
 interface Props {
   children: ReactNode;
 }
 
-export function Layout({children}: Props) {
+export function Layout({ children }: Props) {
   return (
-    <div>
-      <h1>Hi</h1>
-      {children}
-    </div>
+    <main>
+      <Header />
+      <div className="px-8">{children}</div>
+    </main>
   );
 }
