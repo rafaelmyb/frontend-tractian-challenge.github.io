@@ -12,7 +12,7 @@ function App() {
       <Layout>
         <NavBar />
         <Divider type="horizontal" className="my-0 border" />
-        <div className="pt-8">
+        <div className="pt-6">
           <Outlet />
         </div>
       </Layout>

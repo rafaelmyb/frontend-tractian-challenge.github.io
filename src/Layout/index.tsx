@@ -9,7 +9,7 @@ export function Layout({ children }: Props) {
   return (
     <main>
       <Header />
-      <div className="px-8">{children}</div>
+      <div className="px-4">{children}</div>
     </main>
   );
 }
