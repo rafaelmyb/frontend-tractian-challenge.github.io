@@ -1,12 +1,14 @@
 import {
   GetAssetByIdPromise,
   GetAssetsPromise,
+  GetUnitsPromise,
   GetUserByIdPromise,
   GetUsersPromise,
 } from "../types/useApiPromises";
 import {
   GetAssetByIdProps,
   GetAssetsProps,
+  GetUnitsProps,
   GetUserByIdProps,
   GetUsersProps,
 } from "../types/useApiProps";
@@ -42,6 +44,14 @@ export async function getUserByIdApi({
   id,
 }: GetUserByIdProps): Promise<GetUserByIdPromise> {
   const response = await client.get(ENDPOINTS.USER_BY_ID(id));
+
+  return response.data;
+}
+
+export async function getUnitsApi({
+  client,
+}: GetUnitsProps): Promise<GetUnitsPromise> {
+  const response = await client.get(ENDPOINTS.UNITS);
 
   return response.data;
 }

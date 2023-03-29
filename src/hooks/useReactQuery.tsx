@@ -3,21 +3,30 @@ import { useQuery } from "react-query";
 import { apiService } from "../services/service.api";
 
 export function useAssets() {
-  const { data, isLoading } = useQuery(
+  const { data: assets, isLoading } = useQuery(
     "getAssets",
     async () => await apiService.getAssets()
   );
 
-  return { data, isLoading };
+  return { assets, isLoading };
 }
 
 export function useAssetById(id: number) {
   const { data, isLoading, isRefetching } = useQuery(
-    "getAssetById",
+    ["asset", id],
     async () => await apiService.getAssetById(id)
   );
 
   return { data, isLoading, isRefetching };
+}
+
+export function useAssetByUnitId(unitId: number) {
+  const { assets, isLoading } = useAssets();
+
+  const assetsByUnit =
+    !isLoading && assets.filter((asset: any) => asset.unitId === unitId);
+
+  return { assetsByUnit, isLoading };
 }
 
 export function useUsers() {
@@ -36,4 +45,13 @@ export function useUserById(id: number) {
   );
 
   return { data, isLoading, isRefetching };
+}
+
+export function useUnits() {
+  const { data, isLoading } = useQuery(
+    "getUnits",
+    async () => await apiService.getUnits()
+  );
+
+  return { data, isLoading };
 }

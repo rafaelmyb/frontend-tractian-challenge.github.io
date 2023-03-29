@@ -17,3 +17,7 @@ export type GetUserByIdProps = {
   client: Axios;
   id: number;
 }
+
+export type GetUnitsProps = {
+  client: Axios;
+}

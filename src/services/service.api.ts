@@ -1,5 +1,11 @@
 import axios, { Axios } from "axios";
-import { getAssetByIdApi, getAssetsApi, getUserByIdApi, getUsersApi } from "../hooks/useApi";
+import {
+  getAssetByIdApi,
+  getAssetsApi,
+  getUnitsApi,
+  getUserByIdApi,
+  getUsersApi,
+} from "../hooks/useApi";
 import { BASE_URL } from "../utils/consts";
 
 export default class ApiService {
@@ -45,7 +51,15 @@ export default class ApiService {
   async getUserById(id: number) {
     const data = await getUserByIdApi({
       client: this.client,
-      id
+      id,
+    });
+
+    return data;
+  }
+
+  async getUnits() {
+    const data = await getUnitsApi({
+      client: this.client,
     });
 
     return data;

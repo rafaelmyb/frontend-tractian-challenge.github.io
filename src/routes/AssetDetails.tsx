@@ -1,13 +1,15 @@
 import { Button, Drawer } from "antd";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { BasicMachineInfo } from "../components/BasicMachineInfo";
 import { MetricsBar } from "../components/MetricsBar";
 import { MobileActions } from "../components/MobileActions";
 import { useDrawerContext } from "../contexts/DrawerContext";
+import { useGeneralContext } from "../contexts/GeneralContext";
 import { useAssetById } from "../hooks/useReactQuery";
 
 export function AssetDetails() {
@@ -19,7 +21,8 @@ export function AssetDetails() {
     handleCloseBasicInfoDrawer,
     handleCloseMetricsDrawer,
   } = useDrawerContext();
-  const isMobile = useMediaQuery({maxWidth: 378})
+  const { selectedUnit } = useGeneralContext();
+  const isMobile = useMediaQuery({ maxWidth: 378 });
 
   const timeStamp =
     !isLoading &&
@@ -43,7 +46,7 @@ export function AssetDetails() {
       },
     ],
   });
-
+  
   return (
     <div>
       {isLoading || isRefetching ? (
