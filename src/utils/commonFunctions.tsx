@@ -11,8 +11,8 @@ export function numberToHour(value: number) {
   return `${hours}h`;
 }
 
-export function dateTimeFormat(value: string) {
-  const dateTime = dayjs(value).format("DD/MM/YYYY HH:mm");
+export function dateTimeFormat(value: string, format: string) {
+  const dateTime = dayjs(value).format(format);
   return `${dateTime}h`;
 }
 

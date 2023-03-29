@@ -6,9 +6,10 @@ import {
   TeamOutlined,
   ThunderboltOutlined,
 } from "@ant-design/icons";
-import { useUserById } from "../hooks/useReactQuery";
+
 import { Info } from "./Info";
 import { InfoExpanded } from "./InfoExpanded";
+import { useUserById } from "../hooks/useReactQuery";
 
 type Props = {
   image: string;
@@ -43,7 +44,7 @@ export function BasicMachineInfo({
   const user = handleUserId();
 
   return (
-    <aside className="w-[300px] h-full">
+    <aside className="w-[300px] h-full max-[910px]:w-full">
       <img
         src={image}
         alt="Image"
