@@ -1,10 +1,11 @@
 export const ENDPOINTS = {
   ASSETS: "/assets",
-  ASSET_BY_ID: (asset_id: number) => `/assets/${asset_id}`,
+  ASSET_BY_ID: (assetId: number) => `/assets/${assetId}`,
   COMPANIES: "/companies",
   UNITS: "/units",
+  UNIT_BY_ID: (unitId: number) => `/units/${unitId}`,
   USERS: "/users",
-  USER_BY_ID: (user_id: number) => `/users/${user_id}`,
+  USER_BY_ID: (userId: number) => `/users/${userId}`,
   WORK_ORDERS: "/workorders",
-  WORK_ORDER_BY_ID: (order_id: number) => `/workorders/${order_id}`,
+  WORK_ORDER_BY_ID: (orderId: number) => `/workorders/${orderId}`,
 }

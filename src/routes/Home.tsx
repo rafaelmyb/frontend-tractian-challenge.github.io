@@ -48,7 +48,7 @@ export function Home() {
                 },
               }}
               placement="bottomLeft"
-              className="ml-8"
+              className="ml-0"
             >
               <Typography.Link className="ml-0 mt-2">
                 <div className="flex flex-row items-center text-sm font-medium">

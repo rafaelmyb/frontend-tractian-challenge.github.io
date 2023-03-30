@@ -9,7 +9,7 @@ export function Assets() {
   const { assetsByUnit, isLoading } = useAssetByUnitId(selectedUnit);
 
   return (
-    <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center">
+    <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center max-[360px]:grid-cols-1">
       {!isLoading &&
         assetsByUnit.map((asset: any) => (
           <Link

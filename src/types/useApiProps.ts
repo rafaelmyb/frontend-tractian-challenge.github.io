@@ -22,6 +22,15 @@ export type GetUnitsProps = {
   client: Axios;
 }
 
+export type GetUnitByIdProps = {
+  client: Axios;
+  unitId: number;
+}
+
+export type GetCompaniesProps = {
+  client: Axios;
+}
+
 export type GetWorkOrdersProps = {
   client: Axios;
 }

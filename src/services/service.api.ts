@@ -3,6 +3,7 @@ import {
   getAssetByIdApi,
   getAssetsApi,
   getCompaniesApi,
+  getUnitByIdApi,
   getUnitsApi,
   getUserByIdApi,
   getUsersApi,
@@ -63,6 +64,15 @@ export default class ApiService {
   async getUnits() {
     const data = await getUnitsApi({
       client: this.client,
+    });
+
+    return data;
+  }
+
+  async getUnitById(unitId: number) {
+    const data = await getUnitByIdApi({
+      client: this.client,
+      unitId,
     });
 
     return data;

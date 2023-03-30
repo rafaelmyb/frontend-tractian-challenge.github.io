@@ -13,8 +13,8 @@ export function MachineCard({ image, name, status }: MachineCardProps) {
   return (
     <Card
       hoverable
-      style={{ width: 240 }}
-      cover={<img src={image} alt={name} className="h-[240px] object-cover" />}
+      className="w-[300px] max-[360px]:w-full"
+      cover={<img src={image} alt={name} className="h-[280px] object-cover" />}
     >
       <Meta title={name} description={statusFormatText(status)} />
     </Card>

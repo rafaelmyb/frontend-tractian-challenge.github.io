@@ -67,6 +67,15 @@ export function useUnits() {
   return { units, isLoading };
 }
 
+export function useUnitById(id: number) {
+  const { data: unit, isLoading } = useQuery(
+    ["unit", id],
+    async () => await apiService.getUnitById(id)
+  );
+
+  return { unit, isLoading };
+}
+
 export function useCompanies() {
   const { data: companies, isLoading } = useQuery(
     "getCompanies",
