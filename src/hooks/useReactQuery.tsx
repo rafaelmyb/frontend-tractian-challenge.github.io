@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { useGeneralContext } from "../contexts/GeneralContext";
 
 import { apiService } from "../services/service.api";
+import { Asset } from "../types/commonTypes";
 
 export function useAssets() {
   const { data: assets, isLoading } = useQuery(
@@ -28,7 +29,7 @@ export function useAssetByUnitId(unitId: number) {
   const { selectedUnit, oldUnit, setSelectedAssetId } = useGeneralContext();
 
   const assetsByUnit =
-    !isLoading && assets.filter((asset: any) => asset.unitId === unitId);
+    !isLoading && assets.filter((asset: Asset) => asset.unitId === unitId);
 
   useEffect(() => {
     if (oldUnit !== selectedUnit && !isLoading) {

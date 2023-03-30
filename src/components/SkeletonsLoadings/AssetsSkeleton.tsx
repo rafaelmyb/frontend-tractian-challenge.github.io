@@ -4,8 +4,9 @@ import { SkeletonLoadingProps } from "../../types/skeletonsLoading";
 export function AssetsSkeleton({isLoading}: SkeletonLoadingProps) {
   return (
     <>
-      {[1, 2, 3].map(() => (
+      {[1, 2, 3].map((i: number) => (
         <Card
+          key={i}
           hoverable
           className="w-[300px] max-[360px]:w-full"
           cover={

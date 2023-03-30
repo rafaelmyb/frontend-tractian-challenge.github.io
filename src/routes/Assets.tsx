@@ -5,6 +5,7 @@ import { AssetsSkeleton } from "../components/SkeletonsLoadings";
 import { useGeneralContext } from "../contexts";
 
 import { useAssetByUnitId } from "../hooks/useReactQuery";
+import { Asset } from "../types/commonTypes";
 
 export function Assets() {
   const { selectedUnit, setSelectedAssetId } = useGeneralContext();
@@ -15,7 +16,7 @@ export function Assets() {
       {isLoading ? (
         <AssetsSkeleton isLoading={isLoading} />
       ) : (
-        assetsByUnit.map((asset: any) => (
+        assetsByUnit.map((asset: Asset) => (
           <Link
             key={asset.id}
             to={`/ativo/${asset.id}`}

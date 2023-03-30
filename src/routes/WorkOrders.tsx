@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { OrderDetails, OrdersList } from "../components/extendedComponents";
 import { useDrawerContext, useGeneralContext } from "../contexts";
 import { useAssetByUnitId, useWorkOrders } from "../hooks/useReactQuery";
+import { Asset, WorkOrder } from "../types/commonTypes";
 
 export function WorkOrders() {
   const {
@@ -27,10 +28,10 @@ export function WorkOrders() {
       !isAssetsLoading &&
       !isWorkOrdersLoading &&
       assetsByUnit
-        .map((asset: any) =>
-          workOrders.find((order: any) => order.assetId === asset.id)
+        .map((asset: Asset) =>
+          workOrders.find((order: WorkOrder) => order.assetId === asset.id)
         )
-        .filter((item: any) => item !== undefined),
+        .filter((item: WorkOrder) => item !== undefined),
     [assetsByUnit, workOrders]
   );
 

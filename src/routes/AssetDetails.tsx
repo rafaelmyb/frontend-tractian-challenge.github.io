@@ -1,9 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
 
-import { Drawer, Skeleton } from "antd";
+import { Drawer } from "antd";
 import {
   BasicAssetInfo,
   MetricsBar,
@@ -16,6 +14,7 @@ import {
   MetricsBarSkeleton,
 } from "../components/SkeletonsLoadings";
 import { AssetDetailsMobileActionsSkeleton } from "../components/SkeletonsLoadings/AssetDetailsMobileActionsSkeleton";
+import { HealthHistoryChart } from "../components/basicComponents";
 
 export function AssetDetails() {
   const { id } = useParams();
@@ -28,30 +27,7 @@ export function AssetDetails() {
   } = useDrawerContext();
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
-  const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910  });
-
-  const timeStamp =
-    !isLoading &&
-    asset.healthHistory.map((item: any) => ({
-      timestamp: item.timestamp,
-    }));
-
-  const getOptions = (type: string) => ({
-    chart: {
-      type,
-      width: 500,
-      height: 300,
-    },
-    title: {
-      text: "",
-    },
-
-    series: [
-      {
-        data: timeStamp,
-      },
-    ],
-  });
+  const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910 });
 
   return (
     <div>
@@ -99,6 +75,8 @@ export function AssetDetails() {
               </div>
             )}
 
+            <HealthHistoryChart asset={asset} isLoading={isLoading} />
+
             {isMediumAndSmallScreen && (
               <Drawer
                 title="Métricas do Ativo"
@@ -138,11 +116,4 @@ export function AssetDetails() {
       )}
     </div>
   );
-}
-
-{
-  /* <HighchartsReact
-              highcharts={Highcharts}
-              options={getOptions("spline")}
-            /> */
 }

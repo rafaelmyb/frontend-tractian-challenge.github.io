@@ -2,9 +2,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { useDebounce } from "react-use";
 import { useGeneralContext } from "../../contexts";
+import { WorkOrder } from "../../types/commonTypes";
 
 type InputFilterProps = {
-  orders: any;
+  orders: WorkOrder[];
 };
 
 export function InputFilter({ orders }: InputFilterProps) {
@@ -21,7 +22,7 @@ export function InputFilter({ orders }: InputFilterProps) {
     const filteredOrders =
       orders &&
       orders.filter(
-        (order: any) =>
+        (order: WorkOrder) =>
           order.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           order.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
           order.priority.toLowerCase().includes(searchTerm.toLowerCase())

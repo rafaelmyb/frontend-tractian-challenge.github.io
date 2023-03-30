@@ -4,3 +4,4 @@ export * from "./InfoExpanded";
 export * from "./MachineCard";
 export * from "./Metric";
 export * from "./CardOrder";
+export * from "./HealthHistoryChart"

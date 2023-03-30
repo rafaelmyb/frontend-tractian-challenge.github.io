@@ -13,11 +13,12 @@ import {
   statusFormatIcon,
   statusFormatText,
 } from "../../utils/commonFunctions";
+import { Metrics } from "../../types/commonTypes";
 
 type MetricsBarProps = {
-  metrics: any;
-  healthScore: any;
-  status: any;
+  metrics: Metrics;
+  healthScore: number;
+  status: string;
 };
 
 export function MetricsBar({ metrics, healthScore, status }: MetricsBarProps) {

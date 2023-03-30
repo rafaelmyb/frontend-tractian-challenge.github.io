@@ -2,9 +2,10 @@ import { InputFilter } from "./InputFilter";
 import { CardOrder } from "../basicComponents";
 import { useGeneralContext } from "../../contexts";
 import { OrdersListSkeleton } from "../SkeletonsLoadings";
+import { WorkOrder } from "../../types/commonTypes";
 
 type OrdersListProps = {
-  orders: any;
+  orders: WorkOrder[];
 };
 
 export function OrdersList({ orders }: OrdersListProps) {
@@ -19,7 +20,7 @@ export function OrdersList({ orders }: OrdersListProps) {
           <OrdersListSkeleton isLoading={!orders} />
         ) : (
           (filteredOrders.length !== 0 ? filteredOrders : orders).map(
-            (order: any) => (
+            (order: WorkOrder) => (
               <div key={order.id} onClick={() => setSelectedOrderId(order.id)}>
                 <CardOrder
                   title={order.title}
