@@ -21,6 +21,8 @@ interface GeneralContextProps {
   setSearchTerm: Dispatch<SetStateAction<string>>;
   filteredOrders: any;
   setFilteredOrders: Dispatch<SetStateAction<any>>;
+  selectedCompanyId: number;
+  setSelectedCompanyId: Dispatch<SetStateAction<number>>;
 }
 
 const GeneralContext = createContext({} as GeneralContextProps);
@@ -36,18 +38,20 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
   const [selectedOrderId, setSelectedOrderId] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [selectedCompanyId, setSelectedCompanyId] = useState<number>(1);
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   function handleRedirect() {
     if (oldUnit !== selectedUnit) {
       setOldUnit(selectedUnit);
-      return navigate("/");
+      return navigate("/ativos");
     }
   }
 
   useEffect(() => {
-    if (pathname !== "/") {
+    if (pathname !== "/ativos") {
       handleRedirect();
     }
   }, [selectedUnit]);
@@ -65,7 +69,9 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
         searchTerm,
         setSearchTerm,
         filteredOrders,
-        setFilteredOrders
+        setFilteredOrders,
+        selectedCompanyId,
+        setSelectedCompanyId,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 
 import { Drawer } from "antd";
 import {
-  BasicMachineInfo,
+  BasicAssetInfo,
   MetricsBar,
   AssetDetailsMobileActions,
 } from "../components/extendedComponents";
@@ -56,7 +56,7 @@ export function AssetDetails() {
         <div className="flex flex-row">
           {!isMinorThanLaptopScreen && (
             <div>
-              <BasicMachineInfo
+              <BasicAssetInfo
                 image={asset.image}
                 model={asset.model}
                 name={asset.name}
@@ -103,7 +103,7 @@ export function AssetDetails() {
                 placement="right"
                 width={isMobile ? 320 : 378}
               >
-                <BasicMachineInfo
+                <BasicAssetInfo
                   image={asset.image}
                   model={asset.model}
                   name={asset.name}

@@ -1,15 +1,25 @@
 import { ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { Header } from "./Header";
+import { HomeLayout } from "./HomeLayout";
+import { MainLayout } from "./MainLayout";
 
 interface Props {
   children: ReactNode;
 }
 
 export function Layout({ children }: Props) {
+  const { pathname } = useLocation();
+
+  console.log(pathname)
+
   return (
-    <main className="h-full">
-      <Header />
-      <div className="px-6 pb-6 h-full max-[768px]:px-4">{children}</div>
+    <main>
+      {pathname === "/" ? (
+        <HomeLayout>{children}</HomeLayout>
+      ) : (
+        <MainLayout>{children}</MainLayout>
+      )}
     </main>
   );
 }

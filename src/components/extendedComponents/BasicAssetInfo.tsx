@@ -10,7 +10,7 @@ import {
 import { Info, InfoExpanded } from "../basicComponents";
 import { useUserById } from "../../hooks/useReactQuery";
 
-type Props = {
+type BasicAssetInfoProps = {
   image: string;
   model: string;
   name: string;
@@ -23,14 +23,14 @@ type Props = {
   assignedUserIds: number[];
 };
 
-export function BasicMachineInfo({
+export function BasicAssetInfo({
   image,
   model,
   name,
   sensors,
   specifications,
   assignedUserIds,
-}: Props) {
+}: BasicAssetInfoProps) {
   function handleUserId() {
     const user = assignedUserIds.map((id: number) => {
       const { user, isLoading, isRefetching } = useUserById(id);

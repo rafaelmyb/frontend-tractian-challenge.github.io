@@ -59,6 +59,14 @@ export async function getUnitsApi({
   return response.data;
 }
 
+export async function getCompaniesApi({
+  client,
+}: GetUnitsProps): Promise<GetUnitsPromise> {
+  const response = await client.get(ENDPOINTS.COMPANIES);
+
+  return response.data;
+}
+
 export async function getWorkOrdersApi({
   client,
 }: GetWorkOrdersProps): Promise<GetUsersPromise> {

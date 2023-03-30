@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import { Home, AssetDetails, WorkOrders } from "./routes";
+import { Home, AssetDetails, WorkOrders, Assets } from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/ativos",
+        element: <Assets />,
       },
       {
         path: "/ativo/:id",

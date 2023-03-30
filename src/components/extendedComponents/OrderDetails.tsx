@@ -12,6 +12,8 @@ export function OrderDetails() {
   const { selectedOrderId } = useGeneralContext();
   const { workOrder, isLoading } = useWorkOrderById(selectedOrderId);
 
+  // useCallback?
+
   // const users = !isLoading && workOrder.assignedUserIds.map((id: number) => {
   //   const { user, isLoading, isRefetching } = useUserById(id);
   //   return { user, isLoading, isRefetching };

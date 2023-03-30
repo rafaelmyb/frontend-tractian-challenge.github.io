@@ -13,11 +13,7 @@ function App() {
       <GeneralProvider>
         <DrawerProvider>
           <Layout>
-            <NavBar />
-            <Divider type="horizontal" className="my-0 border" />
-            <div className="pt-6 h-full max-[910px]:pt-4">
-              <Outlet />
-            </div>
+            <Outlet />
           </Layout>
         </DrawerProvider>
       </GeneralProvider>

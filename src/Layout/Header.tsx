@@ -11,19 +11,24 @@ type UnitProps = {
 };
 
 export function Header() {
-  const { selectedUnit, setSelectedUnit } = useGeneralContext();
+  const { selectedUnit, setSelectedUnit, selectedCompanyId } =
+    useGeneralContext();
   const { units, isLoading } = useUnits();
 
-  const items =
+  const selectedCompanyUnits =
     !isLoading &&
-    units.map((unit: UnitProps) => ({
-      key: unit.id,
-      label: unit.name,
-    }));
+    units.filter((unit: UnitProps) => unit.companyId === selectedCompanyId);
+
+  const items = selectedCompanyUnits && selectedCompanyUnits.map((unit: UnitProps) => ({
+    key: unit.id,
+    label: unit.name,
+  }));
 
   return (
     <header className="flex flex-row items-center bg-blue-600 h-14 px-6 max-[768px]:px-4 max-[768px]:justify-between">
-      <h1 className="text-white font-extrabold text-4xl max-[425px]:text-3xl">TRACTIAN</h1>
+      <h1 className="text-white font-extrabold text-4xl max-[425px]:text-3xl">
+        TRACTIAN
+      </h1>
       {!isLoading && (
         <Dropdown
           menu={{

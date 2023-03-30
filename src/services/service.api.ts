@@ -2,6 +2,7 @@ import axios, { Axios } from "axios";
 import {
   getAssetByIdApi,
   getAssetsApi,
+  getCompaniesApi,
   getUnitsApi,
   getUserByIdApi,
   getUsersApi,
@@ -61,6 +62,14 @@ export default class ApiService {
 
   async getUnits() {
     const data = await getUnitsApi({
+      client: this.client,
+    });
+
+    return data;
+  }
+
+  async getCompanies() {
+    const data = await getCompaniesApi({
       client: this.client,
     });
 
