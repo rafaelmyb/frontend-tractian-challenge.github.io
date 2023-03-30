@@ -1,4 +1,5 @@
 import { Card } from "antd";
+import { UsersSkeleton } from "../components/SkeletonsLoadings";
 import { useGeneralContext } from "../contexts";
 import { useUnitById, useUnits, useUsers } from "../hooks/useReactQuery";
 
@@ -21,13 +22,16 @@ export function Users() {
 
   return (
     <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center max-[360px]:grid-cols-1">
-      {!isUsersLoading &&
-        !isUnitLoading &&
+      {isUsersLoading || isUnitLoading ? (
+        <UsersSkeleton isLoading={isUsersLoading || isUnitLoading} />
+      ) : (
         usersBySelectedUnit.map((user: any) => (
-          <Card style={{
-            flex: 1,
-            width: "100%"
-          }}>
+          <Card
+            style={{
+              flex: 1,
+              width: "100%",
+            }}
+          >
             <div className="flex flex-row w-full gap-6">
               <div className="flex flex-col justify-start gap-2">
                 <p>Nome:</p>
@@ -42,7 +46,8 @@ export function Users() {
               </div>
             </div>
           </Card>
-        ))}
+        ))
+      )}
     </div>
   );
 }

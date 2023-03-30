@@ -1,5 +1,7 @@
+import { Card, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import { MachineCard } from "../components/basicComponents";
+import { AssetsSkeleton } from "../components/SkeletonsLoadings";
 import { useGeneralContext } from "../contexts";
 
 import { useAssetByUnitId } from "../hooks/useReactQuery";
@@ -10,7 +12,9 @@ export function Assets() {
 
   return (
     <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center max-[360px]:grid-cols-1">
-      {!isLoading &&
+      {isLoading ? (
+        <AssetsSkeleton isLoading={isLoading} />
+      ) : (
         assetsByUnit.map((asset: any) => (
           <Link
             key={asset.id}
@@ -23,7 +27,8 @@ export function Assets() {
               status={asset.status}
             />
           </Link>
-        ))}
+        ))
+      )}
     </div>
   );
 }

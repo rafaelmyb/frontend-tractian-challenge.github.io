@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import { Drawer } from "antd";
+import { Drawer, Skeleton } from "antd";
 import {
   BasicAssetInfo,
   MetricsBar,
@@ -11,6 +11,11 @@ import {
 } from "../components/extendedComponents";
 import { useDrawerContext } from "../contexts";
 import { useAssetById } from "../hooks/useReactQuery";
+import {
+  BasicAssetInfoSkeleton,
+  MetricsBarSkeleton,
+} from "../components/SkeletonsLoadings";
+import { AssetDetailsMobileActionsSkeleton } from "../components/SkeletonsLoadings/AssetDetailsMobileActionsSkeleton";
 
 export function AssetDetails() {
   const { id } = useParams();
@@ -23,7 +28,7 @@ export function AssetDetails() {
   } = useDrawerContext();
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
-  const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910 });
+  const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910  });
 
   const timeStamp =
     !isLoading &&
@@ -51,7 +56,22 @@ export function AssetDetails() {
   return (
     <div>
       {isLoading || isRefetching ? (
-        <p>Loading...</p>
+        <div className="flex flex-row">
+          {!isMinorThanLaptopScreen && (
+            <BasicAssetInfoSkeleton isLoading={isLoading} />
+          )}
+          <div className="flex flex-col ml-4 w-full max-[910px]:ml-0">
+            {isMinorThanLaptopScreen && (
+              <AssetDetailsMobileActionsSkeleton
+                isLoading={isLoading || isRefetching}
+              />
+            )}
+
+            {!isMediumAndSmallScreen && (
+              <MetricsBarSkeleton isLoading={isLoading} />
+            )}
+          </div>
+        </div>
       ) : (
         <div className="flex flex-row">
           {!isMinorThanLaptopScreen && (
@@ -67,7 +87,7 @@ export function AssetDetails() {
             </div>
           )}
           <div className="ml-4 w-full max-[910px]:ml-0">
-            <AssetDetailsMobileActions />
+            {isMinorThanLaptopScreen && <AssetDetailsMobileActions />}
 
             {!isMediumAndSmallScreen && (
               <div>

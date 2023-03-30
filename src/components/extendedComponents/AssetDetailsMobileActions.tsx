@@ -6,10 +6,11 @@ import { useDrawerContext } from "../../contexts/DrawerContext";
 export function AssetDetailsMobileActions() {
   const { handleOpenMetricsDrawer, handleOpenBasicInfoDrawer } =
     useDrawerContext();
+    
   const isMobile = useMediaQuery({ maxWidth: 375 });
 
   return (
-    <div className="flex flex-row items-center justify-between mb-4 min-[910px]:hidden">
+    <div className="flex flex-row items-center justify-between mb-4">
       <Button
         type="primary"
         ghost
@@ -21,7 +22,7 @@ export function AssetDetailsMobileActions() {
       <Button
         type="primary"
         ghost
-        className="min-[910px]:hidden min-[768px]:ml-auto"
+        className="min-[768px]:ml-auto"
         onClick={handleOpenBasicInfoDrawer}
       >
         {isMobile ? "Informações" : "Informações do Ativo"}

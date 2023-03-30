@@ -1,7 +1,7 @@
 import { Checkbox, Divider } from "antd";
-import { useMemo, useState } from "react";
 import { useGeneralContext } from "../../contexts";
 import { useUserById, useWorkOrderById } from "../../hooks/useReactQuery";
+import { OrderDetailsSkeleton } from "../SkeletonsLoadings";
 
 type CheckListItemProps = {
   completed: boolean;
@@ -23,7 +23,9 @@ export function OrderDetails() {
 
   return (
     <div className="w-full rounded-2xl border h-full p-4">
-      {!isLoading && (
+      {isLoading ? (
+        <OrderDetailsSkeleton isLoading={isLoading} />
+      ) : (
         <div>
           <header>
             <h1 className="text-3xl font-medium max-[425px]:text-2xl">

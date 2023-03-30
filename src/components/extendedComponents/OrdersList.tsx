@@ -1,6 +1,7 @@
 import { InputFilter } from "./InputFilter";
 import { CardOrder } from "../basicComponents";
 import { useGeneralContext } from "../../contexts";
+import { OrdersListSkeleton } from "../SkeletonsLoadings";
 
 type OrdersListProps = {
   orders: any;
@@ -14,7 +15,9 @@ export function OrdersList({ orders }: OrdersListProps) {
       <InputFilter orders={orders} />
 
       <div className="flex flex-col gap-3 mt-6">
-        {orders &&
+        {!orders ? (
+          <OrdersListSkeleton isLoading={!orders} />
+        ) : (
           (filteredOrders.length !== 0 ? filteredOrders : orders).map(
             (order: any) => (
               <div key={order.id} onClick={() => setSelectedOrderId(order.id)}>
@@ -25,7 +28,8 @@ export function OrdersList({ orders }: OrdersListProps) {
                 />
               </div>
             )
-          )}
+          )
+        )}
       </div>
     </div>
   );

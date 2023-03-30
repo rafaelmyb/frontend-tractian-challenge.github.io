@@ -12,7 +12,7 @@ export function Metric({ label, icon, value, className }: MetricProps) {
         {label}
       </span>
       <div className="flex flex-row gap-3 items-center mt-2 max-[1620px]:items-start">
-        <div className="max-[1620px]:mt-1">{icon}</div>
+        <div className="max-[1620px]:mt-[2px]">{icon}</div>
         <strong className="flex text-2xl text-black max-[1440px]:text-lg">
           {value}
         </strong>

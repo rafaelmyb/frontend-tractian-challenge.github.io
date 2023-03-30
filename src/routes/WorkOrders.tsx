@@ -1,5 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Divider, Drawer } from "antd";
+import { Button, Divider, Drawer, Skeleton } from "antd";
 import { useEffect, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 
@@ -8,8 +8,6 @@ import { useDrawerContext, useGeneralContext } from "../contexts";
 import { useAssetByUnitId, useWorkOrders } from "../hooks/useReactQuery";
 
 export function WorkOrders() {
-  const { selectedUnit, oldUnit, setSelectedOrderId, selectedOrderId } =
-    useGeneralContext();
   const {
     isWorkOrdersListDrawerOpen,
     handleOpenWorkOrdersListDrawer,
@@ -18,11 +16,11 @@ export function WorkOrders() {
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
 
+  const { selectedUnit, oldUnit, setSelectedOrderId, selectedOrderId } =
+    useGeneralContext();
   const { assetsByUnit, isLoading: isAssetsLoading } =
     useAssetByUnitId(selectedUnit);
   const { workOrders, isLoading: isWorkOrdersLoading } = useWorkOrders();
-
-  const isLoading = isAssetsLoading && isWorkOrdersLoading;
 
   const orders = useMemo(
     () =>
@@ -38,7 +36,7 @@ export function WorkOrders() {
 
   // melhorar esses dois useEffects
   useEffect(() => {
-    if (selectedOrderId === 0 && !isLoading) {
+    if (selectedOrderId === 0 && !isAssetsLoading && !isWorkOrdersLoading) {
       setSelectedOrderId(orders[0].id);
     }
   }, [orders]);
@@ -48,7 +46,7 @@ export function WorkOrders() {
       setSelectedOrderId(orders[0].id);
     }
   }, [selectedUnit]);
-  
+
   return (
     <div>
       <header className="flex flex-row items-center justify-between w-full">
@@ -66,14 +64,27 @@ export function WorkOrders() {
       />
 
       <div className="flex flex-row gap-4 max-[768px]:flex-col">
-        <Button
-          type="primary"
-          ghost
-          className="ml-auto min-[769px]:hidden"
-          onClick={handleOpenWorkOrdersListDrawer}
-        >
-          {isMobile ? "Ordens" : "Lista de Ordens"}
-        </Button>
+        {!orders ? (
+          <div className="min-[769px]:hidden ml-auto">
+            <Skeleton.Button
+              active={!orders}
+              size={"default"}
+              shape={"square"}
+              style={{
+                width: 100,
+              }}
+            />
+          </div>
+        ) : (
+          <Button
+            type="primary"
+            ghost
+            className="ml-auto min-[769px]:hidden"
+            onClick={handleOpenWorkOrdersListDrawer}
+          >
+            {isMobile ? "Ordens" : "Lista de Ordens"}
+          </Button>
+        )}
 
         {!isMediumAndSmallScreen && (
           <div>
