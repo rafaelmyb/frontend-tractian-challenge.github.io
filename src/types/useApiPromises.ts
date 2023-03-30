@@ -7,3 +7,7 @@ export type GetUsersPromise = any;
 export type GetUserByIdPromise = any;
 
 export type GetUnitsPromise = any;
+
+export type GetWorkOrdersPromise = any;
+
+export type GetWorkOrderByIdPromise = any;

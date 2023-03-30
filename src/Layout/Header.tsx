@@ -2,7 +2,7 @@ import { Dropdown, Typography } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 import { useUnits } from "../hooks/useReactQuery";
-import { useGeneralContext } from "../contexts/GeneralContext";
+import { useGeneralContext } from "../contexts";
 
 type UnitProps = {
   companyId: number;
@@ -12,7 +12,7 @@ type UnitProps = {
 
 export function Header() {
   const { selectedUnit, setSelectedUnit } = useGeneralContext();
-  const { data: units, isLoading } = useUnits();
+  const { units, isLoading } = useUnits();
 
   const items =
     !isLoading &&
@@ -22,8 +22,8 @@ export function Header() {
     }));
 
   return (
-    <header className="flex flex-row items-center bg-blue-600 h-14 px-6 max-[768px]:px-4">
-      <h1 className="text-white font-extrabold text-4xl">TRACTIAN</h1>
+    <header className="flex flex-row items-center bg-blue-600 h-14 px-6 max-[768px]:px-4 max-[768px]:justify-between">
+      <h1 className="text-white font-extrabold text-4xl max-[425px]:text-3xl">TRACTIAN</h1>
       {!isLoading && (
         <Dropdown
           menu={{

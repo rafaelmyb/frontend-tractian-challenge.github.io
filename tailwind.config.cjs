@@ -7,10 +7,9 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
       },
       colors: {
-        blue: { 500: "#1D4ED8", 600: "#1D3B8A" },
+        blue: { 100: "#92C4FC", 500: "#1D4ED8", 600: "#1D3B8A" },
       },
       gridTemplateColumns: {
-        // Simple 16 column grid
         autoFit: "repeat(auto-fit, minmax(240px, max-content))",
       },
     },

@@ -62,3 +62,16 @@ export function statusFormatIcon(status: string) {
       return "Processando...";
   }
 }
+
+export function colorPriorityOrder(priority: string) {
+  switch (priority) {
+    case "high":
+      return "bg-red-500";
+    case "medium":
+      return "bg-orange-500";
+    case "low":
+      return "bg-yellow-500";
+    default:
+      return "bg-green-500";
+  }
+}

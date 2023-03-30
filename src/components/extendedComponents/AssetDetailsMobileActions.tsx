@@ -1,9 +1,9 @@
 import { useMediaQuery } from "react-responsive";
 
 import { Button } from "antd";
-import { useDrawerContext } from "../contexts/DrawerContext";
+import { useDrawerContext } from "../../contexts/DrawerContext";
 
-export function MobileActions() {
+export function AssetDetailsMobileActions() {
   const { handleOpenMetricsDrawer, handleOpenBasicInfoDrawer } =
     useDrawerContext();
   const isMobile = useMediaQuery({ maxWidth: 375 });

@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { QueryClientProvider } from "react-query";
 
-import { Layout } from "./Layout";
-import { NavBar } from "./components/NavBar";
-import { queryClient } from "./services/queryClient";
 import Divider from "antd/es/divider";
-import { DrawerProvider } from "./contexts/DrawerContext";
-import { GeneralProvider } from "./contexts/GeneralContext";
+import { Layout } from "./Layout";
+import { NavBar } from "./components/extendedComponents";
+import { queryClient } from "./services/queryClient";
+import { DrawerProvider, GeneralProvider } from "./contexts";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
           <Layout>
             <NavBar />
             <Divider type="horizontal" className="my-0 border" />
-            <div className="pt-6 max-[910px]:pt-4">
+            <div className="pt-6 h-full max-[910px]:pt-4">
               <Outlet />
             </div>
           </Layout>

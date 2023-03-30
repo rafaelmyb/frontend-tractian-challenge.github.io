@@ -12,10 +12,14 @@ interface DrawerContextProps {
   setIsBasicInfoDrawerOpen: Dispatch<SetStateAction<boolean>>;
   isMetricsDrawerOpen: boolean;
   setIsMetricsDrawerOpen: Dispatch<SetStateAction<boolean>>;
+  isWorkOrdersListDrawerOpen: boolean;
+  setIsWorkOrdersListDrawerOpen: Dispatch<SetStateAction<boolean>>;
   handleOpenBasicInfoDrawer(): void;
   handleCloseBasicInfoDrawer(): void;
   handleOpenMetricsDrawer(): void;
   handleCloseMetricsDrawer(): void;
+  handleOpenWorkOrdersListDrawer(): void;
+  handleCloseWorkOrdersListDrawer(): void;
 }
 
 const DrawerContext = createContext({} as DrawerContextProps);
@@ -27,6 +31,8 @@ interface DrawerProviderProps {
 export function DrawerProvider({ children }: DrawerProviderProps) {
   const [isBasicInfoDrawerOpen, setIsBasicInfoDrawerOpen] = useState(false);
   const [isMetricsDrawerOpen, setIsMetricsDrawerOpen] = useState(false);
+  const [isWorkOrdersListDrawerOpen, setIsWorkOrdersListDrawerOpen] =
+    useState(false);
 
   function handleOpenBasicInfoDrawer() {
     setIsBasicInfoDrawerOpen(true);
@@ -44,6 +50,14 @@ export function DrawerProvider({ children }: DrawerProviderProps) {
     setIsMetricsDrawerOpen(false);
   }
 
+  function handleOpenWorkOrdersListDrawer() {
+    setIsWorkOrdersListDrawerOpen(true);
+  }
+
+  function handleCloseWorkOrdersListDrawer() {
+    setIsWorkOrdersListDrawerOpen(false);
+  }
+
   return (
     <DrawerContext.Provider
       value={{
@@ -51,10 +65,14 @@ export function DrawerProvider({ children }: DrawerProviderProps) {
         setIsBasicInfoDrawerOpen,
         isMetricsDrawerOpen,
         setIsMetricsDrawerOpen,
+        isWorkOrdersListDrawerOpen,
+        setIsWorkOrdersListDrawerOpen,
         handleOpenBasicInfoDrawer,
         handleCloseBasicInfoDrawer,
         handleOpenMetricsDrawer,
         handleCloseMetricsDrawer,
+        handleCloseWorkOrdersListDrawer,
+        handleOpenWorkOrdersListDrawer,
       }}
     >
       {children}

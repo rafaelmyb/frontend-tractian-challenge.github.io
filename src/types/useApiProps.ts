@@ -6,7 +6,7 @@ export type GetAssetsProps = {
 
 export type GetAssetByIdProps = {
   client: Axios;
-  id: number;
+  assetId: number;
 }
 
 export type GetUsersProps = {
@@ -15,9 +15,18 @@ export type GetUsersProps = {
 
 export type GetUserByIdProps = {
   client: Axios;
-  id: number;
+  userId: number;
 }
 
 export type GetUnitsProps = {
   client: Axios;
+}
+
+export type GetWorkOrdersProps = {
+  client: Axios;
+}
+
+export type GetWorkOrderByIdProps = {
+  client: Axios;
+  orderId: number;
 }

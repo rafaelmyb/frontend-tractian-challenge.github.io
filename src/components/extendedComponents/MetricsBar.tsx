@@ -5,14 +5,14 @@ import {
   RiseOutlined,
 } from "@ant-design/icons";
 
-import { Metric } from "./Metric";
+import { Card } from "antd";
+import { Metric } from "../basicComponents";
 import {
   dateTimeFormat,
   numberToHour,
   statusFormatIcon,
   statusFormatText,
-} from "../utils/commonFunctions";
-import { Card } from "antd";
+} from "../../utils/commonFunctions";
 
 type MetricsBarProps = {
   metrics: any;

@@ -1,32 +1,33 @@
-import { Button, Drawer } from "antd";
+import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import { useParams, useNavigate } from "react-router-dom";
 
-import { BasicMachineInfo } from "../components/BasicMachineInfo";
-import { MetricsBar } from "../components/MetricsBar";
-import { MobileActions } from "../components/MobileActions";
-import { useDrawerContext } from "../contexts/DrawerContext";
-import { useGeneralContext } from "../contexts/GeneralContext";
+import { Drawer } from "antd";
+import {
+  BasicMachineInfo,
+  MetricsBar,
+  AssetDetailsMobileActions,
+} from "../components/extendedComponents";
+import { useDrawerContext } from "../contexts";
 import { useAssetById } from "../hooks/useReactQuery";
 
 export function AssetDetails() {
   const { id } = useParams();
-  const { data, isLoading, isRefetching } = useAssetById(Number(id));
+  const { asset, isLoading, isRefetching } = useAssetById(Number(id));
   const {
     isBasicInfoDrawerOpen,
     isMetricsDrawerOpen,
     handleCloseBasicInfoDrawer,
     handleCloseMetricsDrawer,
   } = useDrawerContext();
-  const { selectedUnit } = useGeneralContext();
   const isMobile = useMediaQuery({ maxWidth: 378 });
+  const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
+  const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910 });
 
   const timeStamp =
     !isLoading &&
-    data.healthHistory.map((item: any) => ({
+    asset.healthHistory.map((item: any) => ({
       timestamp: item.timestamp,
     }));
 
@@ -46,64 +47,72 @@ export function AssetDetails() {
       },
     ],
   });
-  
+
   return (
     <div>
       {isLoading || isRefetching ? (
         <p>Loading...</p>
       ) : (
         <div className="flex flex-row">
-          <div className="max-[910px]:hidden">
-            <BasicMachineInfo
-              image={data.image}
-              model={data.model}
-              name={data.name}
-              sensors={data.sensors}
-              specifications={data.specifications}
-              assignedUserIds={data.assignedUserIds}
-            />
-          </div>
-          <div className="ml-4 w-full max-[910px]:ml-0">
-            <MobileActions />
-
-            <div className="max-[768px]:hidden">
-              <MetricsBar
-                metrics={data.metrics}
-                healthScore={data.healthscore}
-                status={data.status}
+          {!isMinorThanLaptopScreen && (
+            <div>
+              <BasicMachineInfo
+                image={asset.image}
+                model={asset.model}
+                name={asset.name}
+                sensors={asset.sensors}
+                specifications={asset.specifications}
+                assignedUserIds={asset.assignedUserIds}
               />
             </div>
+          )}
+          <div className="ml-4 w-full max-[910px]:ml-0">
+            <AssetDetailsMobileActions />
 
-            <Drawer
-              title="Métricas do Ativo"
-              open={isMetricsDrawerOpen}
-              onClose={handleCloseMetricsDrawer}
-              placement="left"
-              width={isMobile ? 320 : 378}
-            >
-              <MetricsBar
-                metrics={data.metrics}
-                healthScore={data.healthscore}
-                status={data.status}
-              />
-            </Drawer>
+            {!isMediumAndSmallScreen && (
+              <div>
+                <MetricsBar
+                  metrics={asset.metrics}
+                  healthScore={asset.healthscore}
+                  status={asset.status}
+                />
+              </div>
+            )}
 
-            <Drawer
-              title="Informações do Ativo"
-              open={isBasicInfoDrawerOpen}
-              onClose={handleCloseBasicInfoDrawer}
-              placement="right"
-              width={isMobile ? 320 : 378}
-            >
-              <BasicMachineInfo
-                image={data.image}
-                model={data.model}
-                name={data.name}
-                sensors={data.sensors}
-                specifications={data.specifications}
-                assignedUserIds={data.assignedUserIds}
-              />
-            </Drawer>
+            {isMediumAndSmallScreen && (
+              <Drawer
+                title="Métricas do Ativo"
+                open={isMetricsDrawerOpen}
+                onClose={handleCloseMetricsDrawer}
+                placement="left"
+                width={isMobile ? 320 : 378}
+              >
+                <MetricsBar
+                  metrics={asset.metrics}
+                  healthScore={asset.healthscore}
+                  status={asset.status}
+                />
+              </Drawer>
+            )}
+
+            {isMinorThanLaptopScreen && (
+              <Drawer
+                title="Informações do Ativo"
+                open={isBasicInfoDrawerOpen}
+                onClose={handleCloseBasicInfoDrawer}
+                placement="right"
+                width={isMobile ? 320 : 378}
+              >
+                <BasicMachineInfo
+                  image={asset.image}
+                  model={asset.model}
+                  name={asset.name}
+                  sensors={asset.sensors}
+                  specifications={asset.specifications}
+                  assignedUserIds={asset.assignedUserIds}
+                />
+              </Drawer>
+            )}
           </div>
         </div>
       )}

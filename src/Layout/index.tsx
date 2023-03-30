@@ -7,9 +7,9 @@ interface Props {
 
 export function Layout({ children }: Props) {
   return (
-    <main>
+    <main className="h-full">
       <Header />
-      <div className="px-6 pb-6 max-[768px]:px-4">{children}</div>
+      <div className="px-6 pb-6 h-full max-[768px]:px-4">{children}</div>
     </main>
   );
 }

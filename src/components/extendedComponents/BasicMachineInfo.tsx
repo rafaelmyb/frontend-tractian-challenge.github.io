@@ -7,9 +7,8 @@ import {
   ThunderboltOutlined,
 } from "@ant-design/icons";
 
-import { Info } from "./Info";
-import { InfoExpanded } from "./InfoExpanded";
-import { useUserById } from "../hooks/useReactQuery";
+import { Info, InfoExpanded } from "../basicComponents";
+import { useUserById } from "../../hooks/useReactQuery";
 
 type Props = {
   image: string;
@@ -34,8 +33,8 @@ export function BasicMachineInfo({
 }: Props) {
   function handleUserId() {
     const user = assignedUserIds.map((id: number) => {
-      const { data, isLoading, isRefetching } = useUserById(id);
-      return { data, isLoading, isRefetching };
+      const { user, isLoading, isRefetching } = useUserById(id);
+      return { user, isLoading, isRefetching };
     });
 
     return user;

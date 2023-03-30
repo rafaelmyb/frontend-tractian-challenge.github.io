@@ -1,5 +1,3 @@
-import { Card } from "antd";
-
 type MetricProps = {
   label: string;
   icon?: any;

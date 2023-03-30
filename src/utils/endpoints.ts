@@ -6,4 +6,5 @@ export const ENDPOINTS = {
   USERS: "/users",
   USER_BY_ID: (user_id: number) => `/users/${user_id}`,
   WORK_ORDERS: "/workorders",
+  WORK_ORDER_BY_ID: (order_id: number) => `/workorders/${order_id}`,
 }

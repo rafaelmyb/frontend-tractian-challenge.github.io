@@ -5,6 +5,8 @@ import {
   getUnitsApi,
   getUserByIdApi,
   getUsersApi,
+  getWorkOrderByIdApi,
+  getWorkOrdersApi,
 } from "../hooks/useApi";
 import { BASE_URL } from "../utils/consts";
 
@@ -31,10 +33,10 @@ export default class ApiService {
     return data;
   }
 
-  async getAssetById(id: number) {
+  async getAssetById(assetId: number) {
     const data = await getAssetByIdApi({
       client: this.client,
-      id,
+      assetId,
     });
 
     return data;
@@ -48,10 +50,10 @@ export default class ApiService {
     return data;
   }
 
-  async getUserById(id: number) {
+  async getUserById(userId: number) {
     const data = await getUserByIdApi({
       client: this.client,
-      id,
+      userId,
     });
 
     return data;
@@ -60,6 +62,23 @@ export default class ApiService {
   async getUnits() {
     const data = await getUnitsApi({
       client: this.client,
+    });
+
+    return data;
+  }
+
+  async getWorkOrders() {
+    const data = await getWorkOrdersApi({
+      client: this.client,
+    });
+
+    return data;
+  }
+
+  async getWorkOrderById(orderId: number) {
+    const data = await getWorkOrderByIdApi({
+      client: this.client,
+      orderId: orderId,
     });
 
     return data;

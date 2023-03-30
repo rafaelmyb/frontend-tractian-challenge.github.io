@@ -13,12 +13,12 @@ export function InfoExpanded({ icon, value, label }: Props) {
           <span className="flex text-sm text-black">{label}</span>
           {value.map(
             (item: any) =>
-              item.data !== undefined && (
+              item.user !== undefined && (
                 <span
-                  key={item.data.id}
+                  key={item.user.id}
                   className="flex text-sm text-gray-500 capitalize"
                 >
-                  {item.data.name}
+                  {item.user.name}
                 </span>
               )
           )}

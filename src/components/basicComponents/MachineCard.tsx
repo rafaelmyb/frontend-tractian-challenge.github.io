@@ -1,5 +1,5 @@
 import { Card } from "antd";
-import { statusFormatText } from "../utils/commonFunctions";
+import { statusFormatText } from "../../utils/commonFunctions";
 
 const { Meta } = Card;
 
