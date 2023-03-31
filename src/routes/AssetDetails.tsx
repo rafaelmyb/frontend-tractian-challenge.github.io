@@ -1,22 +1,27 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-import { Drawer } from "antd";
+import { Drawer, Modal } from "antd";
 import {
   BasicAssetInfo,
   MetricsBar,
   AssetDetailsMobileActions,
 } from "../components/extendedComponents";
-import { useDrawerContext } from "../contexts";
-import { useAssetById, useUserById } from "../hooks/useReactQuery";
 import {
   BasicAssetInfoSkeleton,
   MetricsBarSkeleton,
+  AssetDetailsMobileActionsSkeleton,
 } from "../components/skeletonsLoadings";
-import { AssetDetailsMobileActionsSkeleton } from "../components/skeletonsLoadings/AssetDetailsMobileActionsSkeleton";
-import { HealthHistoryChart } from "../components/basicComponents";
-import { useEffect, useState } from "react";
 import { getUserById } from "../hooks/useApi";
+import { useAssetById } from "../hooks/useReactQuery";
+import {
+  useDrawerContext,
+  useGeneralContext,
+  useModalsContext,
+} from "../contexts";
+import { HealthHistoryChart } from "../components/basicComponents";
+import { UpdateAssetForm } from "../components/extendedComponents/UpdateAssetForm";
 
 export function AssetDetails() {
   const { id } = useParams();
@@ -27,10 +32,12 @@ export function AssetDetails() {
     handleCloseBasicInfoDrawer,
     handleCloseMetricsDrawer,
   } = useDrawerContext();
+  const { handleCloseIsUpdateAssetModal, isUpdateAssetOpen } =
+    useModalsContext();
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
   const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910 });
-  const [users, setUsersState] = useState([]);
+  const { users, setUsers } = useGeneralContext();
 
   useEffect(() => {
     async function handleUserId() {
@@ -46,7 +53,7 @@ export function AssetDetails() {
     }
 
     if (!isLoading) {
-      handleUserId().then((response: any) => setUsersState(response));
+      handleUserId().then((response: any) => setUsers(response));
     }
   }, [asset]);
 
@@ -136,6 +143,16 @@ export function AssetDetails() {
               </Drawer>
             )}
           </div>
+
+          <Modal
+            title="Update Asset"
+            open={isUpdateAssetOpen}
+            onOk={handleCloseIsUpdateAssetModal}
+            onCancel={handleCloseIsUpdateAssetModal}
+            footer={false}
+          >
+            <UpdateAssetForm asset={asset} />
+          </Modal>
         </div>
       )}
     </div>

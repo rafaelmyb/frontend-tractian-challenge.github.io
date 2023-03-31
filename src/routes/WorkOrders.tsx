@@ -8,9 +8,18 @@ import {
   useGeneralContext,
   useModalsContext,
 } from "../contexts";
-import { Asset, WorkOrder } from "../types/commonTypes";
-import { useAssetByUnitId, useWorkOrders } from "../hooks/useReactQuery";
-import { OrderDetails, OrdersList } from "../components/extendedComponents";
+import { Asset, User, WorkOrder } from "../types/commonTypes";
+import {
+  useAssetByUnitId,
+  useUsers,
+  useWorkOrders,
+} from "../hooks/useReactQuery";
+import {
+  CreateWorkOrderForm,
+  OrderDetails,
+  OrdersList,
+} from "../components/extendedComponents";
+import { getUserById } from "../hooks/useApi";
 
 export function WorkOrders() {
   const {
@@ -32,6 +41,7 @@ export function WorkOrders() {
   const { assetsByUnit, isLoading: isAssetsLoading } =
     useAssetByUnitId(selectedUnit);
   const { workOrders, isLoading: isWorkOrdersLoading } = useWorkOrders();
+  const { users } = useUsers();
 
   const orders = useMemo(
     () =>
@@ -52,6 +62,11 @@ export function WorkOrders() {
       setSelectedOrderId(orders[0].id);
     }
   }, [orders, selectedUnit]);
+
+  const usersByUnit = useMemo(
+    () => users?.filter((user: User) => user.unitId === selectedUnit),
+    [users, selectedUnit]
+  );
 
   return (
     <div>
@@ -127,8 +142,9 @@ export function WorkOrders() {
         open={isCreateWorkOrderOpen}
         onOk={handleCloseIsCreateWorkOrderModal}
         onCancel={handleCloseIsCreateWorkOrderModal}
+        footer={false}
       >
-        {/* <CreateWorkOrderForm assets={assetsByUnit} users={} /> */}
+        <CreateWorkOrderForm assets={assetsByUnit} users={usersByUnit} />
       </Modal>
     </div>
   );

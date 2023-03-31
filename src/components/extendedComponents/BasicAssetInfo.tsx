@@ -2,6 +2,7 @@ import {
   AppstoreOutlined,
   CloudSyncOutlined,
   DashboardOutlined,
+  EditOutlined,
   FireOutlined,
   TeamOutlined,
   ThunderboltOutlined,
@@ -9,6 +10,7 @@ import {
 
 import { Info, InfoExpanded } from "../basicComponents";
 import { User } from "../../types/commonTypes";
+import { useModalsContext } from "../../contexts";
 
 type BasicAssetInfoProps = {
   image: string | undefined;
@@ -33,6 +35,8 @@ export function BasicAssetInfo({
   specifications,
   users,
 }: BasicAssetInfoProps) {
+  const { handleOpenIsUpdateAssetModal } = useModalsContext();
+
   return (
     <aside className="w-[300px] h-full max-[910px]:w-full">
       <img
@@ -40,7 +44,13 @@ export function BasicAssetInfo({
         alt="Image"
         className="w-full h-[200px] object-cover rounded-xl"
       />
-      <strong className="flex text-xl mt-4 mb-4">{name}</strong>
+      <div className="flex flex-row justify-between items-center">
+        <strong className="flex text-xl mt-4 mb-4">{name}</strong>
+        <EditOutlined
+          className="cursor-pointer text-blue-500"
+          onClick={handleOpenIsUpdateAssetModal}
+        />
+      </div>
 
       <Info
         icon={

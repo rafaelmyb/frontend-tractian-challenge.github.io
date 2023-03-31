@@ -20,10 +20,12 @@ interface GeneralContextProps {
   setSelectedOrderId: Dispatch<SetStateAction<number>>;
   searchTerm: string;
   setSearchTerm: Dispatch<SetStateAction<string>>;
-  filteredOrders: WorkOrder[];
-  setFilteredOrders: Dispatch<SetStateAction<WorkOrder[]>>;
+  filteredOrders: WorkOrder[] | undefined;
+  setFilteredOrders: Dispatch<SetStateAction<WorkOrder[] | undefined>>;
   selectedCompanyId: number;
   setSelectedCompanyId: Dispatch<SetStateAction<number>>;
+  users: any[];
+  setUsers: Dispatch<SetStateAction<never[]>>;
 }
 
 const GeneralContext = createContext({} as GeneralContextProps);
@@ -38,8 +40,11 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
   const [selectedAssetId, setSelectedAssetId] = useState<number>(1);
   const [selectedOrderId, setSelectedOrderId] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOrders, setFilteredOrders] = useState<WorkOrder[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<WorkOrder[] | undefined>(
+    []
+  );
   const [selectedCompanyId, setSelectedCompanyId] = useState<number>(1);
+  const [users, setUsers] = useState([]);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -73,6 +78,8 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
         setFilteredOrders,
         selectedCompanyId,
         setSelectedCompanyId,
+        users,
+        setUsers,
       }}
     >
       {children}

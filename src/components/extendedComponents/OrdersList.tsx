@@ -19,7 +19,7 @@ export function OrdersList({ orders }: OrdersListProps) {
         {!orders ? (
           <OrdersListSkeleton isLoading={!orders} />
         ) : (
-          (filteredOrders.length !== 0 ? filteredOrders : orders).map(
+          (filteredOrders?.length !== 0 && filteredOrders !== undefined ? filteredOrders : orders).map(
             (order: WorkOrder) => (
               <div key={order.id} onClick={() => setSelectedOrderId(order.id)}>
                 <CardOrder

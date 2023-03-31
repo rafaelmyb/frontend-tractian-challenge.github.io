@@ -1,20 +1,22 @@
 import { useRef } from "react";
-import { Checkbox, Col, Form, FormInstance, Input, Row, Select } from "antd";
+import { Button, Checkbox, Form, FormInstance, Input, Select } from "antd";
 
 import { Asset, User } from "../../types/commonTypes";
+import { useModalsContext } from "../../contexts";
 
 const { Option } = Select;
 
 type CreateWorkOrderForm = {
-  assets: Asset[];
-  users: User[];
+  assets: Asset[] | undefined;
+  users: User[] | undefined;
 };
 
 export function CreateWorkOrderForm({ assets, users }: CreateWorkOrderForm) {
   const formRef = useRef<FormInstance>(null);
+  const { handleCloseIsCreateWorkOrderModal } = useModalsContext();
 
   return (
-    <Form ref={formRef} name="control-ref" style={{ maxWidth: 600 }}>
+    <Form ref={formRef} name="control-ref" className="max-w-[600px] mt-6">
       <Form.Item name="title" label="Title" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -53,14 +55,29 @@ export function CreateWorkOrderForm({ assets, users }: CreateWorkOrderForm) {
         rules={[{ required: true }]}
       >
         <Checkbox.Group>
-          <Row>
+          <div className="grid grid-cols-2">
             {users?.map((user) => (
-              <Col key={user.id} span={8}>
+              <div key={user.id}>
                 <Checkbox value={user.name}>{user.name}</Checkbox>
-              </Col>
+              </div>
             ))}
-          </Row>
+          </div>
         </Checkbox.Group>
+      </Form.Item>
+
+      <Form.Item>
+        <div className="flex flex-row justify-end mb-[-32px] md:flex-row gap-2 flex-wrap">
+          <Button className="bg-blue-500" type="primary" htmlType="submit">
+            Submit
+          </Button>
+          <Button
+            danger
+            htmlType="button"
+            onClick={handleCloseIsCreateWorkOrderModal}
+          >
+            Cancel
+          </Button>
+        </div>
       </Form.Item>
     </Form>
   );
