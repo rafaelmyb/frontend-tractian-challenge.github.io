@@ -5,3 +5,4 @@ export * from "./CreateWorkOrderForm";
 export * from "./UpdateAssetForm";
 export * from "./UpdateUserForm";
 export * from "./UpdateUnitForm";
+export * from "./UpdateWorkOrderForm"

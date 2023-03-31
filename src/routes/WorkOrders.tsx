@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Divider, Drawer, Modal, Skeleton } from "antd";
@@ -14,11 +14,8 @@ import {
   useUsers,
   useWorkOrders,
 } from "../hooks/useReactQuery";
-import {
-  OrderDetails,
-  OrdersList,
-} from "../components/extendedComponents";
-import { CreateWorkOrderForm } from "../components/extendedComponents/Forms";
+import { OrderDetails, OrdersList } from "../components/extendedComponents";
+import { CreateWorkOrderForm, UpdateWorkOrderForm } from "../components/extendedComponents/Forms";
 
 export function WorkOrders() {
   const {
@@ -30,7 +27,11 @@ export function WorkOrders() {
     isCreateWorkOrderOpen,
     handleCloseIsCreateWorkOrderModal,
     handleOpenIsCreateWorkOrderModal,
+    isUpdateWorkOrderOpen,
+    handleCloseIsUpdateWorkOrderModal,
   } = useModalsContext();
+
+  const [workOrderId, setWorkOrderId] = useState<number>(0)
 
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
@@ -119,7 +120,7 @@ export function WorkOrders() {
           </div>
         )}
 
-        {selectedOrderId !== 0 && <OrderDetails />}
+        {selectedOrderId !== 0 && <OrderDetails setWorkOrderId={setWorkOrderId} />}
 
         {isMediumAndSmallScreen && (
           <Drawer
@@ -139,11 +140,19 @@ export function WorkOrders() {
       <Modal
         title="Create Work Order"
         open={isCreateWorkOrderOpen}
-        onOk={handleCloseIsCreateWorkOrderModal}
         onCancel={handleCloseIsCreateWorkOrderModal}
         footer={false}
       >
         <CreateWorkOrderForm assets={assetsByUnit} users={usersByUnit} />
+      </Modal>
+
+      <Modal
+        title="Update WorkOrder"
+        open={isUpdateWorkOrderOpen}
+        onCancel={handleCloseIsUpdateWorkOrderModal}
+        footer={false}
+      >
+        <UpdateWorkOrderForm workorderId={workOrderId} />
       </Modal>
     </div>
   );

@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Checkbox, Divider, Skeleton } from "antd";
 
 import { User } from "../../types/commonTypes";
 import { getUserById } from "../../hooks/useApi";
-import { useGeneralContext } from "../../contexts";
+import { useGeneralContext, useModalsContext } from "../../contexts";
 import { useWorkOrderById } from "../../hooks/useReactQuery";
 import { OrderDetailsSkeleton } from "../SkeletonLoadings";
+import { EditOutlined } from "@ant-design/icons";
 
 type CheckListItemProps = {
   completed: boolean;
   task: string;
 };
 
-export function OrderDetails() {
+export function OrderDetails({ setWorkOrderId }: any) {
+  const { handleOpenIsUpdateWorkOrderModal } = useModalsContext();
   const { selectedOrderId } = useGeneralContext();
   const { workOrder, isLoading } = useWorkOrderById(selectedOrderId);
   const [users, setUsers] = useState<User[]>([]);
@@ -39,11 +41,20 @@ export function OrderDetails() {
         <OrderDetailsSkeleton isLoading={isLoading} />
       ) : (
         <div>
-          <header>
-            <h1 className="text-3xl font-medium max-[425px]:text-2xl">
-              {workOrder?.title}
-            </h1>
-            <p className="mt-4">{workOrder?.description}</p>
+          <header className="flex flex-row">
+            <div className="flex flex-col">
+              <h1 className="text-3xl font-medium max-[425px]:text-2xl">
+                {workOrder?.title}
+              </h1>
+              <p className="mt-4">{workOrder?.description}</p>
+            </div>
+            <EditOutlined
+              className="ml-auto"
+              onClick={() => {
+                setWorkOrderId(workOrder?.id);
+                handleOpenIsUpdateWorkOrderModal();
+              }}
+            />
           </header>
 
           <Divider type="horizontal" className="mt-4 mb-6 border" />
@@ -69,9 +80,7 @@ export function OrderDetails() {
             {isLoading ? (
               <Skeleton active={isLoading} />
             ) : (
-              users.map((user: User) => (
-                <div key={user.id}>{user.name}</div>
-              ))
+              users.map((user: User) => <div key={user.id}>{user.name}</div>)
             )}
           </div>
         </div>

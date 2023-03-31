@@ -36,6 +36,10 @@ interface ModalsContextProps {
   setIsUpdateUserOpen: Dispatch<SetStateAction<boolean>>;
   handleCloseIsUpdateUserModal(): void;
   handleOpenIsUpdateUserModal(): void;
+  isUpdateWorkOrderOpen: boolean;
+  setIsUpdateWorkOrderOpen: Dispatch<SetStateAction<boolean>>;
+  handleCloseIsUpdateWorkOrderModal(): void;
+  handleOpenIsUpdateWorkOrderModal(): void;
 }
 
 const ModalsContext = createContext({} as ModalsContextProps);
@@ -52,6 +56,7 @@ export function ModalsProvider({ children }: ModalsProviderProps) {
   const [isUpdateAssetOpen, setIsUpdateAssetOpen] = useState(false);
   const [isUpdateUnitOpen, setIsUpdateUnitOpen] = useState(false);
   const [isUpdateUserOpen, setIsUpdateUserOpen] = useState(false);
+  const [isUpdateWorkOrderOpen, setIsUpdateWorkOrderOpen] = useState(false);
 
   function handleCloseIsCreateAssetModal() {
     setIsCreateAssetOpen(false);
@@ -109,6 +114,14 @@ export function ModalsProvider({ children }: ModalsProviderProps) {
     setIsUpdateUserOpen(true);
   }
 
+  function handleCloseIsUpdateWorkOrderModal() {
+    setIsUpdateWorkOrderOpen(false);
+  }
+
+  function handleOpenIsUpdateWorkOrderModal() {
+    setIsUpdateWorkOrderOpen(true);
+  }
+
   return (
     <ModalsContext.Provider
       value={{
@@ -140,6 +153,10 @@ export function ModalsProvider({ children }: ModalsProviderProps) {
         setIsUpdateUserOpen,
         handleOpenIsUpdateUserModal,
         handleCloseIsUpdateUserModal,
+        isUpdateWorkOrderOpen,
+        setIsUpdateWorkOrderOpen,
+        handleOpenIsUpdateWorkOrderModal,
+        handleCloseIsUpdateWorkOrderModal,
       }}
     >
       {children}
