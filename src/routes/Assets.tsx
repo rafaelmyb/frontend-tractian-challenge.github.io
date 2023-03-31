@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Modal } from "antd";
+import { Button, Divider, Modal } from "antd";
 
 import { Asset } from "../types/commonTypes";
 import { useAssetByUnitId } from "../hooks/useReactQuery";
@@ -9,15 +9,34 @@ import { useGeneralContext, useModalsContext } from "../contexts";
 import { CreateAssetForm } from "../components/extendedComponents/Forms";
 
 export function Assets() {
-  const { isCreateAssetOpen, handleCloseIsCreateAssetModal, handleOpenIsCreateAssetModal } = useModalsContext();
+  const {
+    isCreateAssetOpen,
+    handleCloseIsCreateAssetModal,
+    handleOpenIsCreateAssetModal,
+  } = useModalsContext();
   const { selectedUnit, setSelectedAssetId } = useGeneralContext();
   const { assetsByUnit, isLoading } = useAssetByUnitId(selectedUnit);
 
   return (
-    <div className="flex flex-col gap-6">
-      <Button type="primary" ghost onClick={handleOpenIsCreateAssetModal} className="ml-auto">
-        Create Asset
-      </Button>
+    <div className="flex flex-col">
+      <div className="flex flex-row items-center justify-between w-full">
+        <h1 className="text-2xl font-medium max-[425px]:text-lg">Assets</h1>
+        <div className="flex flex-row gap-2 ml-auto">
+          <Button
+            type="primary"
+            ghost
+            onClick={handleOpenIsCreateAssetModal}
+            className="ml-auto"
+          >
+            Create Asset
+          </Button>
+        </div>
+      </div>
+
+      <Divider
+        type="horizontal"
+        className="mt-4 mb-6 border max-[768px]:mb-4"
+      />
 
       <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center max-[360px]:grid-cols-1">
         {isLoading ? (

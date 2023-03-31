@@ -1,4 +1,6 @@
 import { AuditOutlined } from "@ant-design/icons";
+import { useMediaQuery } from "react-responsive";
+import { useDrawerContext } from "../../contexts";
 import { colorPriorityOrder } from "../../utils/commonFunctions";
 
 type CardOrderProps = {
@@ -8,11 +10,19 @@ type CardOrderProps = {
 };
 
 export function CardOrder({ title, status, priority }: CardOrderProps) {
+  const { handleCloseWorkOrdersListDrawer } = useDrawerContext();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   return (
-    <div className="cardOrder flex flex-row items-center w-full rounded-2xl bg-white p-4 cursor-pointer border transition duration-200 hover:bg-blue-500">
+    <div
+      className="cardOrder flex flex-row items-center w-full rounded-2xl bg-white p-4 cursor-pointer border transition duration-200 hover:bg-blue-500"
+      onClick={isMobile ? handleCloseWorkOrdersListDrawer : () => {}}
+    >
       <AuditOutlined className="text-[50px] text-blue-100" />
       <div className="flex flex-col gap-2 ml-2 w-full">
-        <strong className="text-gray-700 transition duration-200">{title}</strong>
+        <strong className="text-gray-700 transition duration-200">
+          {title}
+        </strong>
 
         <div className="flex flex-row justify-between">
           <span className="rounded-3xl bg-blue-100 px-2 h-4 text-[10px] font-semibold text-blue-500">

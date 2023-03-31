@@ -95,7 +95,7 @@ export function HealthHistoryChart({
   };
 
   return (
-    <Card className="mt-4">
+    <Card>
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </Card>
   );

@@ -7,10 +7,10 @@ export function AssetDetailsMobileActions() {
   const { handleOpenMetricsDrawer, handleOpenBasicInfoDrawer } =
     useDrawerContext();
     
-  const isMobile = useMediaQuery({ maxWidth: 375 });
+  const isMobile = useMediaQuery({ maxWidth: 488 });
 
   return (
-    <div className="flex flex-row items-center justify-between mb-4">
+    <div className="flex flex-row items-center gap-2">
       <Button
         type="primary"
         ghost

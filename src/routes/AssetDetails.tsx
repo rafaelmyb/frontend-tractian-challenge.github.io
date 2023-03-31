@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-import { Drawer, Modal } from "antd";
+import { Divider, Drawer, Modal } from "antd";
 import {
   BasicAssetInfo,
   MetricsBar,
@@ -77,61 +77,21 @@ export function AssetDetails() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row">
-          {!isMinorThanLaptopScreen && (
-            <div>
-              <BasicAssetInfo
-                image={asset?.image}
-                model={asset?.model}
-                name={asset?.name}
-                sensors={asset?.sensors}
-                specifications={asset?.specifications}
-                users={users}
-              />
-            </div>
-          )}
-          <div className="ml-4 w-full max-[910px]:ml-0">
+        <div>
+          <header className="flex flex-row items-center justify-between w-full">
+            <h1 className="text-2xl font-medium max-[425px]:text-lg">
+              Asset Details
+            </h1>
             {isMinorThanLaptopScreen && <AssetDetailsMobileActions />}
+          </header>
+          <Divider
+            type="horizontal"
+            className="mt-4 mb-6 border max-[768px]:mb-4"
+          />
 
-            {!isMediumAndSmallScreen && (
+          <div className="flex flex-row">
+            {!isMinorThanLaptopScreen && (
               <div>
-                <MetricsBar
-                  metrics={asset?.metrics}
-                  healthScore={asset?.healthscore}
-                  status={asset?.status}
-                />
-              </div>
-            )}
-
-            <HealthHistoryChart
-              healthHistory={asset?.healthHistory}
-              isLoading={isLoading}
-            />
-
-            {isMediumAndSmallScreen && (
-              <Drawer
-                title="Métricas do Ativo"
-                open={isMetricsDrawerOpen}
-                onClose={handleCloseMetricsDrawer}
-                placement="left"
-                width={isMobile ? 320 : 378}
-              >
-                <MetricsBar
-                  metrics={asset?.metrics}
-                  healthScore={asset?.healthscore}
-                  status={asset?.status}
-                />
-              </Drawer>
-            )}
-
-            {isMinorThanLaptopScreen && (
-              <Drawer
-                title="Informações do Ativo"
-                open={isBasicInfoDrawerOpen}
-                onClose={handleCloseBasicInfoDrawer}
-                placement="right"
-                width={isMobile ? 320 : 378}
-              >
                 <BasicAssetInfo
                   image={asset?.image}
                   model={asset?.model}
@@ -140,19 +100,70 @@ export function AssetDetails() {
                   specifications={asset?.specifications}
                   users={users}
                 />
-              </Drawer>
+              </div>
             )}
-          </div>
+            <div className="ml-4 w-full max-[910px]:ml-0">
+              {!isMediumAndSmallScreen && (
+                <div>
+                  <MetricsBar
+                    metrics={asset?.metrics}
+                    healthScore={asset?.healthscore}
+                    status={asset?.status}
+                  />
+                </div>
+              )}
 
-          <Modal
-            title="Update Asset"
-            open={isUpdateAssetOpen}
-            onOk={handleCloseIsUpdateAssetModal}
-            onCancel={handleCloseIsUpdateAssetModal}
-            footer={false}
-          >
-            <UpdateAssetForm asset={asset} />
-          </Modal>
+              <HealthHistoryChart
+                healthHistory={asset?.healthHistory}
+                isLoading={isLoading}
+              />
+
+              {isMediumAndSmallScreen && (
+                <Drawer
+                  title="Métricas do Ativo"
+                  open={isMetricsDrawerOpen}
+                  onClose={handleCloseMetricsDrawer}
+                  placement="right"
+                  width={isMobile ? 320 : 378}
+                >
+                  <MetricsBar
+                    metrics={asset?.metrics}
+                    healthScore={asset?.healthscore}
+                    status={asset?.status}
+                  />
+                </Drawer>
+              )}
+
+              {isMinorThanLaptopScreen && (
+                <Drawer
+                  title="Informações do Ativo"
+                  open={isBasicInfoDrawerOpen}
+                  onClose={handleCloseBasicInfoDrawer}
+                  placement="right"
+                  width={isMobile ? 320 : 378}
+                >
+                  <BasicAssetInfo
+                    image={asset?.image}
+                    model={asset?.model}
+                    name={asset?.name}
+                    sensors={asset?.sensors}
+                    specifications={asset?.specifications}
+                    users={users}
+                  />
+                </Drawer>
+              )}
+            </div>
+
+            <Modal
+              title="Update Asset"
+              open={isUpdateAssetOpen}
+              onOk={handleCloseIsUpdateAssetModal}
+              onCancel={handleCloseIsUpdateAssetModal}
+              footer={false}
+            >
+              <UpdateAssetForm asset={asset} />
+            </Modal>
+          </div>
         </div>
       )}
     </div>

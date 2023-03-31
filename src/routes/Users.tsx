@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Button, Card, Modal } from "antd";
+import { Button, Card, Divider, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 import { useUnitById, useUsers } from "../hooks/useReactQuery";
 import { UsersSkeleton } from "../components/skeletonsLoadings";
 import { useGeneralContext, useModalsContext } from "../contexts";
-import { CreateUserForm, UpdateUserForm } from "../components/extendedComponents/Forms";
+import {
+  CreateUserForm,
+  UpdateUserForm,
+} from "../components/extendedComponents/Forms";
 
 type UserProps = {
   companyId: number;
@@ -34,15 +37,27 @@ export function Users() {
   );
 
   return (
-    <div className="flex flex-col gap-6">
-      <Button
-        type="primary"
-        ghost
-        className="ml-auto"
-        onClick={handleOpenIsCreateUserModal}
-      >
-        Create User
-      </Button>
+    <div className="flex flex-col">
+      <header className="flex flex-row items-center justify-between w-full">
+        <h1 className="text-2xl font-medium max-[425px]:text-lg">
+          Users
+        </h1>
+
+        <Button
+          type="primary"
+          ghost
+          className="ml-auto"
+          onClick={handleOpenIsCreateUserModal}
+        >
+          Create User
+        </Button>
+      </header>
+
+      <Divider
+        type="horizontal"
+        className="mt-4 mb-6 border max-[768px]:mb-4"
+      />
+
       <div className="grid grid-cols-autoFit w-full gap-4 items-center justify-center max-[360px]:grid-cols-1">
         {isUsersLoading || isUnitLoading ? (
           <UsersSkeleton isLoading={isUsersLoading || isUnitLoading} />

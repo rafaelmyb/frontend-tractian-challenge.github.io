@@ -1,4 +1,4 @@
-import { Button, Modal, Skeleton } from "antd";
+import { Button, Divider, Modal, Skeleton } from "antd";
 
 import {
   AssetsHealthScoreChart,
@@ -61,15 +61,33 @@ export function Dashboard() {
         <Skeleton active={isLoading} className="mt-4" />
       ) : (
         <div className="flex flex-col gap-6">
-          <div className="flex flex-row gap-2 ml-auto">
-            <Button type="primary" ghost onClick={handleOpenIsCreateUnitModal}>
-              Create Unit
-            </Button>
+          <div className="flex flex-row items-center justify-between w-full">
+            <h1 className="text-2xl font-medium max-[425px]:text-lg">
+              Dashboard
+            </h1>
+            <div className="flex flex-row gap-2 ml-auto">
+              <Button
+                type="primary"
+                ghost
+                onClick={handleOpenIsCreateUnitModal}
+              >
+                Create Unit
+              </Button>
 
-            <Button type="primary" ghost onClick={handleOpenIsUpdateUnitModal}>
-              Update Unit
-            </Button>
+              <Button
+                type="primary"
+                ghost
+                onClick={handleOpenIsUpdateUnitModal}
+              >
+                Update Unit
+              </Button>
+            </div>
           </div>
+
+          <Divider
+            type="horizontal"
+            className="mt-0 mb-2 border max-[768px]:mb-4"
+          />
 
           <AssetsStatusChart data={assetPieChartData} />
           <AssetsHealthScoreChart data={assetsByHealth} />
