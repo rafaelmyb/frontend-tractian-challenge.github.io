@@ -6,6 +6,7 @@ import { Drawer, Modal } from "antd";
 import {
   BasicAssetInfo,
   MetricsBar,
+  UpdateAssetForm,
   AssetDetailsMobileActions,
 } from "../components/extendedComponents";
 import {
@@ -21,7 +22,6 @@ import {
   useModalsContext,
 } from "../contexts";
 import { HealthHistoryChart } from "../components/basicComponents";
-import { UpdateAssetForm } from "../components/extendedComponents/UpdateAssetForm";
 
 export function AssetDetails() {
   const { id } = useParams();

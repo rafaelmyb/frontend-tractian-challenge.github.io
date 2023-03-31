@@ -82,12 +82,12 @@ export function useUnits() {
 }
 
 export function useUnitById(id: number) {
-  const { data: unit, isLoading } = useQuery(
+  const { data: unit, isLoading, isRefetching } = useQuery(
     ["unit", id],
     async () => await getUnitById(id)
   );
 
-  return { unit, isLoading };
+  return { unit, isLoading, isRefetching };
 }
 
 export function useCompanies() {

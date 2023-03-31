@@ -1,15 +1,27 @@
-import { Skeleton } from "antd";
+import { Button, Modal, Skeleton } from "antd";
 
 import {
   AssetsHealthScoreChart,
   AssetsStatusChart,
 } from "../components/basicComponents";
 import { Asset } from "../types/commonTypes";
-import { useGeneralContext } from "../contexts";
+import { useGeneralContext, useModalsContext } from "../contexts";
 import { useAssetByUnitId } from "../hooks/useReactQuery";
+import {
+  CreateUnitForm,
+  UpdateUnitForm,
+} from "../components/extendedComponents";
 
 export function Dashboard() {
   const { selectedUnit } = useGeneralContext();
+  const {
+    isCreateUnitOpen,
+    isUpdateUnitOpen,
+    handleCloseIsUpdateUnitModal,
+    handleOpenIsUpdateUnitModal,
+    handleOpenIsCreateUnitModal,
+    handleCloseIsCreateUnitModal,
+  } = useModalsContext();
   const { assetsByUnit, isLoading } = useAssetByUnitId(selectedUnit);
 
   const assetsByStatus = assetsByUnit?.reduce((acc: any, asset: any) => {
@@ -48,9 +60,37 @@ export function Dashboard() {
       {isLoading ? (
         <Skeleton active={isLoading} className="mt-4" />
       ) : (
-        <div className="mt-4 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-row gap-2 ml-auto">
+            <Button type="primary" ghost onClick={handleOpenIsCreateUnitModal}>
+              Create Unit
+            </Button>
+
+            <Button type="primary" ghost onClick={handleOpenIsUpdateUnitModal}>
+              Update Unit
+            </Button>
+          </div>
+
           <AssetsStatusChart data={assetPieChartData} />
           <AssetsHealthScoreChart data={assetsByHealth} />
+
+          <Modal
+            title="Create Unit"
+            open={isCreateUnitOpen}
+            onCancel={handleCloseIsCreateUnitModal}
+            footer={false}
+          >
+            <CreateUnitForm />
+          </Modal>
+
+          <Modal
+            title="Update Unit"
+            open={isUpdateUnitOpen}
+            onCancel={handleCloseIsUpdateUnitModal}
+            footer={false}
+          >
+            <UpdateUnitForm unitId={selectedUnit} />
+          </Modal>
         </div>
       )}
     </div>

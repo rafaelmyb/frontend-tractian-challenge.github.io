@@ -66,7 +66,7 @@ export function CreateWorkOrderForm({ assets, users }: CreateWorkOrderForm) {
       </Form.Item>
 
       <Form.Item>
-        <div className="flex flex-row justify-end mb-[-32px] md:flex-row gap-2 flex-wrap">
+        <div className="flex flex-row justify-end mb-[-32px] gap-2">
           <Button className="bg-blue-500" type="primary" htmlType="submit">
             Submit
           </Button>

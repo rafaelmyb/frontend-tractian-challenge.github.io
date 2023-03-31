@@ -19,7 +19,6 @@ import {
   OrderDetails,
   OrdersList,
 } from "../components/extendedComponents";
-import { getUserById } from "../hooks/useApi";
 
 export function WorkOrders() {
   const {
