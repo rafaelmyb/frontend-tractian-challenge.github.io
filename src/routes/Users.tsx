@@ -3,12 +3,12 @@ import { Button, Card, Divider, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 import { useUnitById, useUsers } from "../hooks/useReactQuery";
-import { UsersSkeleton } from "../components/skeletonsLoadings";
 import { useGeneralContext, useModalsContext } from "../contexts";
 import {
   CreateUserForm,
   UpdateUserForm,
 } from "../components/extendedComponents/Forms";
+import { UsersSkeleton } from "../components/SkeletonLoadings";
 
 type UserProps = {
   companyId: number;

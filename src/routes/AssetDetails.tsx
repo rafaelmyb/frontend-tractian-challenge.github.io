@@ -8,11 +8,6 @@ import {
   MetricsBar,
   AssetDetailsMobileActions,
 } from "../components/extendedComponents";
-import {
-  BasicAssetInfoSkeleton,
-  MetricsBarSkeleton,
-  AssetDetailsMobileActionsSkeleton,
-} from "../components/skeletonsLoadings";
 import { getUserById } from "../hooks/useApi";
 import { useAssetById } from "../hooks/useReactQuery";
 import {
@@ -22,6 +17,7 @@ import {
 } from "../contexts";
 import { HealthHistoryChart } from "../components/basicComponents";
 import { UpdateAssetForm } from "../components/extendedComponents/Forms";
+import { AssetDetailsMobileActionsSkeleton, BasicAssetInfoSkeleton, MetricsBarSkeleton } from "../components/SkeletonLoadings";
 
 export function AssetDetails() {
   const { id } = useParams();

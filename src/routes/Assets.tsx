@@ -4,9 +4,9 @@ import { Button, Divider, Modal } from "antd";
 import { Asset } from "../types/commonTypes";
 import { useAssetByUnitId } from "../hooks/useReactQuery";
 import { MachineCard } from "../components/basicComponents";
-import { AssetsSkeleton } from "../components/skeletonsLoadings";
 import { useGeneralContext, useModalsContext } from "../contexts";
 import { CreateAssetForm } from "../components/extendedComponents/Forms";
+import { AssetsSkeleton } from "../components/SkeletonLoadings";
 
 export function Assets() {
   const {

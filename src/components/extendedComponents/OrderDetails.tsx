@@ -4,8 +4,8 @@ import { Checkbox, Divider, Skeleton } from "antd";
 import { User } from "../../types/commonTypes";
 import { getUserById } from "../../hooks/useApi";
 import { useGeneralContext } from "../../contexts";
-import { OrderDetailsSkeleton } from "../skeletonsLoadings";
 import { useWorkOrderById } from "../../hooks/useReactQuery";
+import { OrderDetailsSkeleton } from "../SkeletonLoadings";
 
 type CheckListItemProps = {
   completed: boolean;

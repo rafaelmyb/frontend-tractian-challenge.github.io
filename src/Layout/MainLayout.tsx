@@ -1,8 +1,8 @@
 import { Divider } from "antd";
 import { ReactNode } from "react";
 import { NavBar } from "../components/extendedComponents";
-
 import { Header } from "./Header";
+
 
 type MainLayoutProps = {
   children: ReactNode;

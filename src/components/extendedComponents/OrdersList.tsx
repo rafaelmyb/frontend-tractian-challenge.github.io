@@ -2,7 +2,7 @@ import { InputFilter } from "./InputFilter";
 import { CardOrder } from "../basicComponents";
 import { useGeneralContext } from "../../contexts";
 import { WorkOrder } from "../../types/commonTypes";
-import { OrdersListSkeleton } from "../skeletonsLoadings";
+import { OrdersListSkeleton } from "../SkeletonLoadings";
 
 type OrdersListProps = {
   orders: WorkOrder[] | undefined;
