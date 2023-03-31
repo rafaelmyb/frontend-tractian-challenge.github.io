@@ -15,10 +15,10 @@ import {
   useWorkOrders,
 } from "../hooks/useReactQuery";
 import {
-  CreateWorkOrderForm,
   OrderDetails,
   OrdersList,
 } from "../components/extendedComponents";
+import { CreateWorkOrderForm } from "../components/extendedComponents/Forms";
 
 export function WorkOrders() {
   const {

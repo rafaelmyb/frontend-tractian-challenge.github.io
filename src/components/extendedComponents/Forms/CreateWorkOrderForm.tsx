@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { Button, Checkbox, Form, FormInstance, Input, Select } from "antd";
 
-import { Asset, User } from "../../types/commonTypes";
-import { useModalsContext } from "../../contexts";
+import { Asset, User } from "../../../types/commonTypes";
+import { useModalsContext } from "../../../contexts";
 
 const { Option } = Select;
 

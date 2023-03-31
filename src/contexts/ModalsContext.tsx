@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import {
   createContext,
   Dispatch,
@@ -7,10 +6,12 @@ import {
   useContext,
   useState,
 } from "react";
-import { UpdateUnitForm } from "../components/extendedComponents";
-import { useGeneralContext } from "./GeneralContext";
 
 interface ModalsContextProps {
+  isCreateAssetOpen: boolean;
+  setIsCreateAssetOpen: Dispatch<SetStateAction<boolean>>;
+  handleCloseIsCreateAssetModal(): void;
+  handleOpenIsCreateAssetModal(): void;
   isCreateWorkOrderOpen: boolean;
   setIsCreateWorkOrderOpen: Dispatch<SetStateAction<boolean>>;
   handleCloseIsCreateWorkOrderModal(): void;
@@ -44,12 +45,21 @@ interface ModalsProviderProps {
 }
 
 export function ModalsProvider({ children }: ModalsProviderProps) {
+  const [isCreateAssetOpen, setIsCreateAssetOpen] = useState(false);
   const [isCreateWorkOrderOpen, setIsCreateWorkOrderOpen] = useState(false);
   const [isCreateUserOpen, setIsCreateUserOpen] = useState(false);
   const [isCreateUnitOpen, setIsCreateUnitOpen] = useState(false);
   const [isUpdateAssetOpen, setIsUpdateAssetOpen] = useState(false);
   const [isUpdateUnitOpen, setIsUpdateUnitOpen] = useState(false);
   const [isUpdateUserOpen, setIsUpdateUserOpen] = useState(false);
+
+  function handleCloseIsCreateAssetModal() {
+    setIsCreateAssetOpen(false);
+  }
+
+  function handleOpenIsCreateAssetModal() {
+    setIsCreateAssetOpen(true);
+  }
 
   function handleCloseIsCreateWorkOrderModal() {
     setIsCreateWorkOrderOpen(false);
@@ -102,6 +112,10 @@ export function ModalsProvider({ children }: ModalsProviderProps) {
   return (
     <ModalsContext.Provider
       value={{
+        isCreateAssetOpen,
+        setIsCreateAssetOpen,
+        handleOpenIsCreateAssetModal,
+        handleCloseIsCreateAssetModal,
         isCreateWorkOrderOpen,
         setIsCreateWorkOrderOpen,
         handleCloseIsCreateWorkOrderModal,

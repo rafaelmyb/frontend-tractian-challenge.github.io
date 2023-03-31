@@ -1,8 +1,8 @@
-import { Button, Form, FormInstance, Input, Select, Skeleton } from "antd";
 import { useRef } from "react";
-import { useModalsContext } from "../../contexts";
-import { useUnits, useUserById } from "../../hooks/useReactQuery";
-import { User } from "../../types/commonTypes";
+import { Button, Form, FormInstance, Input, Select, Skeleton } from "antd";
+
+import { useModalsContext } from "../../../contexts";
+import { useUnits, useUserById } from "../../../hooks/useReactQuery";
 
 const { Option } = Select;
 

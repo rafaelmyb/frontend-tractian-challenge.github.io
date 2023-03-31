@@ -5,7 +5,7 @@ import { EditOutlined } from "@ant-design/icons";
 import { useUnitById, useUsers } from "../hooks/useReactQuery";
 import { UsersSkeleton } from "../components/skeletonsLoadings";
 import { useGeneralContext, useModalsContext } from "../contexts";
-import { CreateUserForm, UpdateUserForm } from "../components/extendedComponents";
+import { CreateUserForm, UpdateUserForm } from "../components/extendedComponents/Forms";
 
 type UserProps = {
   companyId: number;

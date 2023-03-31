@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Button, Form, FormInstance, Input, Skeleton } from "antd";
-import { useModalsContext } from "../../contexts";
-import { useUnitById } from "../../hooks/useReactQuery";
+import { useModalsContext } from "../../../contexts";
+import { useUnitById } from "../../../hooks/useReactQuery";
 
 type UpdateUnitProps = {
   unitId: number;

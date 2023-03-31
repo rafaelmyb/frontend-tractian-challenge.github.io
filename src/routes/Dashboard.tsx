@@ -10,7 +10,7 @@ import { useAssetByUnitId } from "../hooks/useReactQuery";
 import {
   CreateUnitForm,
   UpdateUnitForm,
-} from "../components/extendedComponents";
+} from "../components/extendedComponents/Forms";
 
 export function Dashboard() {
   const { selectedUnit } = useGeneralContext();

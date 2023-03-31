@@ -10,10 +10,12 @@ import {
   Upload,
 } from "antd";
 import { ExclamationCircleFilled, UploadOutlined } from "@ant-design/icons";
-import { useModalsContext } from "../../contexts";
-import { useUnits, useUsers } from "../../hooks/useReactQuery";
-import { Asset } from "../../types/commonTypes";
-import { SENSORS } from "../../utils/consts";
+
+import { SENSORS } from "../../../utils/consts";
+import { Asset } from "../../../types/commonTypes";
+import { useModalsContext } from "../../../contexts";
+import { formatFile } from "../../../utils/commonFunctions";
+import { useUnits, useUsers } from "../../../hooks/useReactQuery";
 
 const { Option } = Select;
 
@@ -30,13 +32,6 @@ export function UpdateAssetForm({ asset }: UpdateAssetFormProps) {
 
   const { users } = useUsers();
   const { units } = useUnits();
-
-  const formatFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
 
   function handleSelectUnit(unit: string) {
     if (unit === "Jaguar Unit") {

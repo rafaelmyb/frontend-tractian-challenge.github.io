@@ -69,3 +69,10 @@ export function colorPriorityOrder(priority: string | undefined) {
       return "bg-green-500";
   }
 }
+
+export function formatFile(e: any) {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e?.fileList;
+}
