@@ -3,7 +3,7 @@ import { QueryClientProvider } from "react-query";
 
 import { queryClient } from "./services/queryClient";
 import { DrawerProvider, GeneralProvider, ModalsProvider } from "./contexts";
-import { Layout } from "./layout";
+import { Layout } from "./Layout";
 
 function App() {
   return (
