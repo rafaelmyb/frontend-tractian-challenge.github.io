@@ -11,8 +11,6 @@ interface Props {
 export function Layout({ children }: Props) {
   const { pathname } = useLocation();
 
-  console.log(pathname)
-
   return (
     <main>
       {pathname === "/" ? (

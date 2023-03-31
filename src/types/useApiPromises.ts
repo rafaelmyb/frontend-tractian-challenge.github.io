@@ -1,17 +1,19 @@
-export type GetAssetsPromise = any;
+import { Asset, Company, Unit, User, WorkOrder } from "./commonTypes";
 
-export type GetAssetByIdPromise = any;
+export type GetAssetsPromise = Asset[];
 
-export type GetUsersPromise = any;
+export type GetAssetByIdPromise = Asset;
 
-export type GetUserByIdPromise = any;
+export type GetUsersPromise = User[];
 
-export type GetUnitsPromise = any;
+export type GetUserByIdPromise = User;
 
-export type GetUnitByIdPromise = any;
+export type GetUnitsPromise = Unit[];
 
-export type GetCompaniesPromise = any;
+export type GetUnitByIdPromise = Unit;
 
-export type GetWorkOrdersPromise = any;
+export type GetCompaniesPromise = Company[];
 
-export type GetWorkOrderByIdPromise = any;
+export type GetWorkOrdersPromise = WorkOrder[];
+
+export type GetWorkOrderByIdPromise = WorkOrder;

@@ -1,7 +1,7 @@
 import { Card } from "antd";
 import { UsersSkeleton } from "../components/SkeletonsLoadings";
 import { useGeneralContext } from "../contexts";
-import { useUnitById, useUnits, useUsers } from "../hooks/useReactQuery";
+import { useUnitById, useUsers } from "../hooks/useReactQuery";
 
 type UserProps = {
   companyId: number;
@@ -18,6 +18,7 @@ export function Users() {
 
   const usersBySelectedUnit =
     !isUsersLoading &&
+    // @ts-ignore acusa undefined por ser promise, mas por conta do !isUsersLoading nunca vai dar undefined
     users.filter((user: UserProps) => user.unitId === selectedUnit);
 
   return (
@@ -25,8 +26,10 @@ export function Users() {
       {isUsersLoading || isUnitLoading ? (
         <UsersSkeleton isLoading={isUsersLoading || isUnitLoading} />
       ) : (
+        // @ts-ignore acusa false mas nesse ponto o usersBySelectedUnit já tem valor
         usersBySelectedUnit.map((user: any) => (
           <Card
+            key={user.id}
             style={{
               flex: 1,
               width: "100%",

@@ -42,3 +42,22 @@ export type WorkOrder = {
   status: string;
   title: string;
 };
+
+export type User = {
+  companyId: number;
+  email: string;
+  id: number;
+  name: string;
+  unitId: number;
+}
+
+export type Unit = {
+  companyId: number;
+  id: number;
+  name: string;
+}
+
+export type Company = {
+  id: number;
+  name: string;
+}

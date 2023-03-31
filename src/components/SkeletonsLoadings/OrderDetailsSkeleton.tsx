@@ -10,6 +10,8 @@ export function OrderDetailsSkeleton({ isLoading }: SkeletonLoadingProps) {
 
       <Skeleton active={isLoading} />
       <Skeleton active={isLoading} title={false} className="mt-4" />
+      <Skeleton active={isLoading} title={false} className="mt-4" />
+      <Skeleton active={isLoading} title={false} className="mt-4" />
     </div>
   );
 }

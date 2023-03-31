@@ -32,15 +32,15 @@ export function BasicAssetInfo({
   assignedUserIds,
 }: BasicAssetInfoProps) {
   function handleUserId() {
-    const user = assignedUserIds.map((id: number) => {
-      const { user, isLoading, isRefetching } = useUserById(id);
-      return { user, isLoading, isRefetching };
+    const users = assignedUserIds.map((id: number) => {
+      const { user } = useUserById(id);
+      return user;
     });
 
-    return user;
+    return users;
   }
 
-  const user = handleUserId();
+  const users = handleUserId();
 
   return (
     <aside className="w-[300px] h-full max-[910px]:w-full">
@@ -119,7 +119,7 @@ export function BasicAssetInfo({
           />
         }
         label="Responsáveis"
-        value={user ? user : null}
+        value={users ? users : null}
       />
     </aside>
   );

@@ -9,7 +9,6 @@ import { Card } from "antd";
 import { Metric } from "../basicComponents";
 import {
   dateTimeFormat,
-  numberToHour,
   statusFormatIcon,
   statusFormatText,
 } from "../../utils/commonFunctions";
@@ -34,7 +33,7 @@ export function MetricsBar({ metrics, healthScore, status }: MetricsBarProps) {
       <Card>
         <Metric
           label="Total de Horas de Coletas Uptime (Ligada)"
-          value={numberToHour(metrics.totalUptime)}
+          value={`${metrics.totalUptime.toFixed(0)} horas`}
           icon={<HistoryOutlined className="text-[24px] text-blue-500" />}
         />
       </Card>

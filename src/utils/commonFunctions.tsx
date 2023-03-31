@@ -1,15 +1,9 @@
 import {
-  AlertOutlined,
   CheckCircleOutlined,
   StopOutlined,
   WarningOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
-
-export function numberToHour(value: number) {
-  var hours = Math.floor(value / 60);
-  return `${hours}h`;
-}
 
 export function dateTimeFormat(value: string, format: string) {
   const dateTime = dayjs(value).format(format);

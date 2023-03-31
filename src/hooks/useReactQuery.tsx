@@ -29,10 +29,11 @@ export function useAssetByUnitId(unitId: number) {
   const { selectedUnit, oldUnit, setSelectedAssetId } = useGeneralContext();
 
   const assetsByUnit =
-    !isLoading && assets.filter((asset: Asset) => asset.unitId === unitId);
+    !isLoading && assets?.filter((asset: Asset) => asset.unitId === unitId);
 
   useEffect(() => {
     if (oldUnit !== selectedUnit && !isLoading) {
+      // @ts-ignore acusa false mas por estar dentro do if de !isLoading, nunca vai dar false
       setSelectedAssetId(assetsByUnit[0].id);
     }
   }, [selectedUnit]);

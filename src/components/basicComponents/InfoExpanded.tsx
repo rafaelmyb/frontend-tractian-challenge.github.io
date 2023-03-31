@@ -1,7 +1,10 @@
+import { ReactElement } from "react";
+import { User } from "../../types/commonTypes";
+
 type Props = {
-  icon: any;
+  icon: ReactElement;
   label: string;
-  value: any;
+  value: User[];
 };
 
 export function InfoExpanded({ icon, value, label }: Props) {
@@ -12,13 +15,13 @@ export function InfoExpanded({ icon, value, label }: Props) {
         <div className="flex flex-col items-start gap-[2px] justify-between w-full">
           <span className="flex text-sm text-black">{label}</span>
           {value.map(
-            (item: any) =>
-              item.user !== undefined && (
+            (item: User) =>
+              item !== undefined && (
                 <span
-                  key={item.user.id}
+                  key={item.id}
                   className="flex text-sm text-gray-500 capitalize"
                 >
-                  {item.user.name}
+                  {item.name}
                 </span>
               )
           )}

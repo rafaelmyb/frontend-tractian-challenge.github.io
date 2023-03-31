@@ -1,5 +1,7 @@
+import { ReactElement } from "react";
+
 interface Props {
-  icon?: any;
+  icon?: ReactElement;
   label: string;
   value: string | string[] | number | number[] | undefined;
 }

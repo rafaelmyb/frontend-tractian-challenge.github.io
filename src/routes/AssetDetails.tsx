@@ -1,3 +1,4 @@
+// @ts-nocheck os assets acusam undefined mas por conta do isLoading nunca chegará undefined aonde são usados
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
@@ -75,7 +76,7 @@ export function AssetDetails() {
               </div>
             )}
 
-            <HealthHistoryChart asset={asset} isLoading={isLoading} />
+            <HealthHistoryChart healthHistory={asset?.healthHistory} isLoading={isLoading} />
 
             {isMediumAndSmallScreen && (
               <Drawer

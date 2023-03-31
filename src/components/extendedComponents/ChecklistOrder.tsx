@@ -7,16 +7,10 @@ type CheckListOrderProps = {
 };
 
 export function ChecklistOrder({ checklist }: CheckListOrderProps) {
-  const onChange = (e: CheckboxChangeEvent) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
-
-  console.log(checklist);
-
   return (
     <div>
       {checklist.map((item: Checklist) => (
-        <Checkbox onChange={onChange}>{item.task}</Checkbox>
+        <Checkbox>{item.task}</Checkbox>
       ))}
     </div>
   );

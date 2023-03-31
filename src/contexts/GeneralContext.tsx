@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { WorkOrder } from "../types/commonTypes";
 
 interface GeneralContextProps {
   selectedUnit: number;
@@ -19,8 +20,8 @@ interface GeneralContextProps {
   setSelectedOrderId: Dispatch<SetStateAction<number>>;
   searchTerm: string;
   setSearchTerm: Dispatch<SetStateAction<string>>;
-  filteredOrders: any;
-  setFilteredOrders: Dispatch<SetStateAction<any>>;
+  filteredOrders: WorkOrder[];
+  setFilteredOrders: Dispatch<SetStateAction<WorkOrder[]>>;
   selectedCompanyId: number;
   setSelectedCompanyId: Dispatch<SetStateAction<number>>;
 }
@@ -37,7 +38,7 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
   const [selectedAssetId, setSelectedAssetId] = useState<number>(1);
   const [selectedOrderId, setSelectedOrderId] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState<WorkOrder[]>([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState<number>(1);
 
   const { pathname } = useLocation();

@@ -1,4 +1,6 @@
 import axios, { Axios } from "axios";
+
+import { BASE_URL } from "../utils/consts";
 import {
   getAssetByIdApi,
   getAssetsApi,
@@ -10,7 +12,6 @@ import {
   getWorkOrderByIdApi,
   getWorkOrdersApi,
 } from "../hooks/useApi";
-import { BASE_URL } from "../utils/consts";
 
 export default class ApiService {
   private baseUrl!: string;

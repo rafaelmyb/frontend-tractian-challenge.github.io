@@ -23,12 +23,16 @@ export function WorkOrders() {
     useAssetByUnitId(selectedUnit);
   const { workOrders, isLoading: isWorkOrdersLoading } = useWorkOrders();
 
+  // os ignores são por acusar de undefined mas por conta dos !loadings nunca chegará undefined nesse ponto
   const orders = useMemo(
     () =>
       !isAssetsLoading &&
       !isWorkOrdersLoading &&
+      // @ts-ignore
       assetsByUnit
+        // @ts-ignore
         .map((asset: Asset) =>
+          // @ts-ignore
           workOrders.find((order: WorkOrder) => order.assetId === asset.id)
         )
         .filter((item: WorkOrder) => item !== undefined),

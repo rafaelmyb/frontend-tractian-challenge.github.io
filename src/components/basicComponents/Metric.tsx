@@ -1,7 +1,9 @@
+import { ReactElement } from "react";
+
 type MetricProps = {
   label: string;
-  icon?: any;
-  value: any;
+  icon?: string | ReactElement;
+  value: number | string;
   className?: string;
 };
 

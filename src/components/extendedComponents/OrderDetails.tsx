@@ -1,6 +1,9 @@
-import { Checkbox, Divider } from "antd";
+import { Checkbox, Divider, Skeleton } from "antd";
+import { useEffect, useState } from "react";
 import { useGeneralContext } from "../../contexts";
-import { useUserById, useWorkOrderById } from "../../hooks/useReactQuery";
+import { useWorkOrderById } from "../../hooks/useReactQuery";
+import { apiService } from "../../services/service.api";
+import { User } from "../../types/commonTypes";
 import { OrderDetailsSkeleton } from "../SkeletonsLoadings";
 
 type CheckListItemProps = {
@@ -11,15 +14,23 @@ type CheckListItemProps = {
 export function OrderDetails() {
   const { selectedOrderId } = useGeneralContext();
   const { workOrder, isLoading } = useWorkOrderById(selectedOrderId);
+  const [users, setUsers] = useState<User[]>([]);
 
-  // useCallback?
+  async function handleUsers() {
+    const users = await Promise.all(
+      // @ts-ignore
+      workOrder.assignedUserIds.map(async (userId: number) => {
+        const user = await apiService.getUserById(userId);
+        return user;
+      })
+    );
 
-  // const users = !isLoading && workOrder.assignedUserIds.map((id: number) => {
-  //   const { user, isLoading, isRefetching } = useUserById(id);
-  //   return { user, isLoading, isRefetching };
-  // });
+    return users;
+  }
 
-  // console.log(users)
+  useEffect(() => {
+    !isLoading && handleUsers().then((response) => setUsers(response));
+  }, [workOrder]);
 
   return (
     <div className="w-full rounded-2xl border h-full p-4">
@@ -29,15 +40,15 @@ export function OrderDetails() {
         <div>
           <header>
             <h1 className="text-3xl font-medium max-[425px]:text-2xl">
-              {workOrder.title}
+              {workOrder?.title}
             </h1>
-            <p className="mt-4">{workOrder.description}</p>
+            <p className="mt-4">{workOrder?.description}</p>
           </header>
 
           <Divider type="horizontal" className="mt-4 mb-6 border" />
 
           <div className="flex flex-col gap-4 items-start">
-            {workOrder.checklist.map((item: CheckListItemProps) => (
+            {workOrder?.checklist.map((item: CheckListItemProps) => (
               <Checkbox
                 key={item.task}
                 defaultChecked={item.completed}
@@ -53,8 +64,14 @@ export function OrderDetails() {
           <Divider type="horizontal" className="mt-6 mb-4 border" />
 
           <div>
-            <h2 className="text-lg">Responsáveis</h2>
-            {/* {users ? users.map((user: any) => <div>{user.name}</div>) : null} */}
+            <h2 className="text-lg mb-2">Responsáveis</h2>
+            {isLoading ? (
+              <Skeleton active={isLoading} />
+            ) : (
+              users.map((user: User) => (
+                <div key={user.id}>{user.name}</div>
+              ))
+            )}
           </div>
         </div>
       )}

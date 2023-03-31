@@ -7,6 +7,7 @@ import {
   GetUserByIdPromise,
   GetUsersPromise,
   GetWorkOrderByIdPromise,
+  GetWorkOrdersPromise,
 } from "../types/useApiPromises";
 import {
   GetAssetByIdProps,
@@ -82,7 +83,7 @@ export async function getCompaniesApi({
 
 export async function getWorkOrdersApi({
   client,
-}: GetWorkOrdersProps): Promise<GetUsersPromise> {
+}: GetWorkOrdersProps): Promise<GetWorkOrdersPromise> {
   const response = await client.get(ENDPOINTS.WORK_ORDERS);
 
   return response.data;
@@ -90,7 +91,7 @@ export async function getWorkOrdersApi({
 
 export async function getWorkOrderByIdApi({
   client,
-  orderId
+  orderId,
 }: GetWorkOrderByIdProps): Promise<GetWorkOrderByIdPromise> {
   const response = await client.get(ENDPOINTS.WORK_ORDER_BY_ID(orderId));
 

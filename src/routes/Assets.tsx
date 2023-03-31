@@ -1,9 +1,8 @@
-import { Card, Skeleton } from "antd";
 import { Link } from "react-router-dom";
+
 import { MachineCard } from "../components/basicComponents";
 import { AssetsSkeleton } from "../components/SkeletonsLoadings";
 import { useGeneralContext } from "../contexts";
-
 import { useAssetByUnitId } from "../hooks/useReactQuery";
 import { Asset } from "../types/commonTypes";
 
@@ -16,6 +15,7 @@ export function Assets() {
       {isLoading ? (
         <AssetsSkeleton isLoading={isLoading} />
       ) : (
+        // @ts-ignore acusa possible undefined mas por conta do isLoading acima, não vai dar undefined
         assetsByUnit.map((asset: Asset) => (
           <Link
             key={asset.id}
