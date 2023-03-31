@@ -1,4 +1,3 @@
-import { Card } from "antd";
 import Highcharts from "highcharts";
 import { HighchartsReact } from "highcharts-react-official";
 import { ChartProps } from "../../types/commonTypes";
@@ -15,8 +14,6 @@ export function AssetsStatusChart({ data }: ChartProps) {
     return item;
   });
 
-  console.log(formattedData);
-
   const chartOptions: Highcharts.Options = {
     chart: {
       plotShadow: false,
@@ -28,7 +25,7 @@ export function AssetsStatusChart({ data }: ChartProps) {
       },
     },
     title: {
-      text: "Status de Ativos",
+      text: "Asset Status",
     },
     accessibility: {
       description: "This chart describe the Status of Assets",
@@ -52,7 +49,7 @@ export function AssetsStatusChart({ data }: ChartProps) {
     series: [
       {
         type: "pie",
-        name: "Status dos Ativos",
+        name: "Asset Status",
         colorByPoint: true,
         data: formattedData,
       },

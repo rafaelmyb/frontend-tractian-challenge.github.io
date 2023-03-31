@@ -4,6 +4,7 @@ import {
   ProjectOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+
 import { useGeneralContext } from "../../contexts/GeneralContext";
 import { ActiveLink } from "../basicComponents";
 
@@ -12,21 +13,21 @@ export function NavBar() {
 
   return (
     <nav className="flex flex-row items-center justify-between max-w-[600px] mx-auto px-8 h-16 max-[910px]:max-w-full max-[910px]:px-6 max-[768px]:h-12 max-[768px]:px-4">
-      <ActiveLink to="/ativos">
+      <ActiveLink to="/assets">
         <ProjectOutlined className="text-[24px] max-[910px]:text-[20px] max-[488px]:text-[18px] max-[425px]:hidden" />
-        Ativos
+        Assets
       </ActiveLink>
-      <ActiveLink to={`/ativo/${selectedAssetId}`}>
+      <ActiveLink to={`/asset/${selectedAssetId}`}>
         <GlobalOutlined className="text-[24px] max-[910px]:text-[20px] max-[488px]:text-[18px] max-[425px]:hidden" />
         Status
       </ActiveLink>
-      <ActiveLink to="/usuarios">
+      <ActiveLink to="/users">
         <UserOutlined className="text-[24px] max-[910px]:text-[20px] max-[488px]:text-[18px] max-[425px]:hidden" />
-        Usuários
+        Users
       </ActiveLink>
-      <ActiveLink to="/ordens-de-servico">
+      <ActiveLink to="/workorders">
         <ApartmentOutlined className="text-[24px] max-[910px]:text-[20px] max-[488px]:text-[18px] max-[425px]:hidden" />
-        Ordens de serviço
+        Work Orders
       </ActiveLink>
     </nav>
   );

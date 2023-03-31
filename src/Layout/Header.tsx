@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { Button, Dropdown, Typography } from "antd";
+import { Dropdown, Typography } from "antd";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
+import { Logo } from "../components/basicComponents";
 import { useUnits } from "../hooks/useReactQuery";
 import { useGeneralContext } from "../contexts";
 
@@ -35,7 +36,7 @@ export function Header() {
     },
     {
       key: 2,
-      label: "Sair",
+      label: "Log out",
     },
   ];
 
@@ -54,9 +55,10 @@ export function Header() {
 
   return (
     <header className="flex flex-row items-center bg-blue-600 h-14 px-6 max-[768px]:px-4 max-[768px]:justify-between">
-      <h1 className="text-white font-extrabold text-4xl max-[425px]:text-3xl">
-        TRACTIAN
-      </h1>
+      <Logo
+        color="#fff"
+        className="w-[177px] h-[40px] max-[425px]:w-[147px] max-[425px]:h-[36px]"
+      />
       {!isLoading && (
         <Dropdown
           menu={{

@@ -1,4 +1,3 @@
-import { Card } from "antd";
 import Highcharts from "highcharts";
 import { HighchartsReact } from "highcharts-react-official";
 import { ChartProps } from "../../types/commonTypes";
@@ -18,6 +17,7 @@ export function AssetsHealthScoreChart({ data }: ChartProps) {
       text: undefined,
     },
     accessibility: {
+      description: "This is as Assets Health Score Chart",
       announceNewData: {
         enabled: true,
       },
@@ -27,7 +27,7 @@ export function AssetsHealthScoreChart({ data }: ChartProps) {
     },
     yAxis: {
       title: {
-        text: "Porcentagem de Saúde",
+        text: "Health Score",
       },
     },
     legend: {
@@ -45,7 +45,7 @@ export function AssetsHealthScoreChart({ data }: ChartProps) {
     series: [
       {
         type: "column",
-        name: "Porcentagem de Saúde",
+        name: "Health Score",
         colorByPoint: true,
         data: data,
       },

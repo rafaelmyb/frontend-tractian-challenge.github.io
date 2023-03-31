@@ -2,14 +2,15 @@ import Highcharts from "highcharts";
 import { HighchartsReact } from "highcharts-react-official";
 
 import { Card } from "antd";
-import { Asset } from "../../types/commonTypes";
 import { useMediaQuery } from "react-responsive";
 
 type HealthHistoryChart = {
-  healthHistory: {
-    status: string;
-    timestamp: string;
-  }[];
+  healthHistory:
+    | {
+        status: string;
+        timestamp: string;
+      }[]
+    | undefined;
   isLoading: boolean;
 };
 
@@ -21,7 +22,7 @@ export function HealthHistoryChart({
   healthHistory,
   isLoading,
 }: HealthHistoryChart) {
-  const dates = healthHistory.map((item) => item.timestamp);
+  const dates = healthHistory?.map((item) => item.timestamp);
 
   const formattedStatusKeys: Status = {
     inOperation: 0,
@@ -31,7 +32,7 @@ export function HealthHistoryChart({
     unplannedStop: 4,
   };
 
-  const formattedStatus = healthHistory.map(
+  const formattedStatus = healthHistory?.map(
     (item) => formattedStatusKeys[item.status]
   );
 
@@ -66,11 +67,11 @@ export function HealthHistoryChart({
         "This chart describe the Health History of selected asset, with status and timestamp",
     },
     title: {
-      text: "Histórico de Saúde",
+      text: "Health History",
     },
     xAxis: {
       type: "datetime",
-      categories: dates.map((date) => {
+      categories: dates?.map((date) => {
         return Highcharts.dateFormat("%d/%m", new Date(date).getTime());
       }),
     },
@@ -83,11 +84,11 @@ export function HealthHistoryChart({
       },
       type: "category",
       categories: [
-        "Em Operação",
-        "Parada Planejada",
-        "Em Alerta",
-        "Em Parada",
-        "Parada Não Planejada",
+        "In Operation",
+        "Planned Stop",
+        "In Alert",
+        "In Downtime",
+        "Unplanned Stop",
       ],
     },
     series: [{ name: "Status", type: "line", data: formattedStatus }],

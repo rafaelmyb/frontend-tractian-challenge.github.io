@@ -1,4 +1,4 @@
-import { Card, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import { SkeletonLoadingProps } from "../../types/skeletonsLoading";
 
 export function BasicAssetInfoSkeleton({ isLoading }: SkeletonLoadingProps) {

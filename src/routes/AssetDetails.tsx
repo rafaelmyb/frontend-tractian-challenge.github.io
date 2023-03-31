@@ -1,4 +1,3 @@
-// @ts-nocheck os assets acusam undefined mas por conta do isLoading nunca chegará undefined aonde são usados
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
@@ -9,13 +8,15 @@ import {
   AssetDetailsMobileActions,
 } from "../components/extendedComponents";
 import { useDrawerContext } from "../contexts";
-import { useAssetById } from "../hooks/useReactQuery";
+import { useAssetById, useUserById } from "../hooks/useReactQuery";
 import {
   BasicAssetInfoSkeleton,
   MetricsBarSkeleton,
-} from "../components/SkeletonsLoadings";
-import { AssetDetailsMobileActionsSkeleton } from "../components/SkeletonsLoadings/AssetDetailsMobileActionsSkeleton";
+} from "../components/skeletonsLoadings";
+import { AssetDetailsMobileActionsSkeleton } from "../components/skeletonsLoadings/AssetDetailsMobileActionsSkeleton";
 import { HealthHistoryChart } from "../components/basicComponents";
+import { useEffect, useState } from "react";
+import { getUserById } from "../hooks/useApi";
 
 export function AssetDetails() {
   const { id } = useParams();
@@ -29,6 +30,25 @@ export function AssetDetails() {
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
   const isMinorThanLaptopScreen = useMediaQuery({ maxWidth: 910 });
+  const [users, setUsersState] = useState([]);
+
+  useEffect(() => {
+    async function handleUserId() {
+      const users = await Promise.all(
+        // @ts-ignore
+        asset.assignedUserIds.map(async (id: number) => {
+          const user = await getUserById(id);
+          return user;
+        })
+      );
+
+      return users;
+    }
+
+    if (!isLoading) {
+      handleUserId().then((response: any) => setUsersState(response));
+    }
+  }, [asset]);
 
   return (
     <div>
@@ -54,12 +74,12 @@ export function AssetDetails() {
           {!isMinorThanLaptopScreen && (
             <div>
               <BasicAssetInfo
-                image={asset.image}
-                model={asset.model}
-                name={asset.name}
-                sensors={asset.sensors}
-                specifications={asset.specifications}
-                assignedUserIds={asset.assignedUserIds}
+                image={asset?.image}
+                model={asset?.model}
+                name={asset?.name}
+                sensors={asset?.sensors}
+                specifications={asset?.specifications}
+                users={users}
               />
             </div>
           )}
@@ -69,14 +89,17 @@ export function AssetDetails() {
             {!isMediumAndSmallScreen && (
               <div>
                 <MetricsBar
-                  metrics={asset.metrics}
-                  healthScore={asset.healthscore}
-                  status={asset.status}
+                  metrics={asset?.metrics}
+                  healthScore={asset?.healthscore}
+                  status={asset?.status}
                 />
               </div>
             )}
 
-            <HealthHistoryChart healthHistory={asset?.healthHistory} isLoading={isLoading} />
+            <HealthHistoryChart
+              healthHistory={asset?.healthHistory}
+              isLoading={isLoading}
+            />
 
             {isMediumAndSmallScreen && (
               <Drawer
@@ -87,9 +110,9 @@ export function AssetDetails() {
                 width={isMobile ? 320 : 378}
               >
                 <MetricsBar
-                  metrics={asset.metrics}
-                  healthScore={asset.healthscore}
-                  status={asset.status}
+                  metrics={asset?.metrics}
+                  healthScore={asset?.healthscore}
+                  status={asset?.status}
                 />
               </Drawer>
             )}
@@ -103,12 +126,12 @@ export function AssetDetails() {
                 width={isMobile ? 320 : 378}
               >
                 <BasicAssetInfo
-                  image={asset.image}
-                  model={asset.model}
-                  name={asset.name}
-                  sensors={asset.sensors}
-                  specifications={asset.specifications}
-                  assignedUserIds={asset.assignedUserIds}
+                  image={asset?.image}
+                  model={asset?.model}
+                  name={asset?.name}
+                  sensors={asset?.sensors}
+                  specifications={asset?.specifications}
+                  users={users}
                 />
               </Drawer>
             )}

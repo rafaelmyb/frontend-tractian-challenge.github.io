@@ -1,11 +1,11 @@
 import { InputFilter } from "./InputFilter";
 import { CardOrder } from "../basicComponents";
 import { useGeneralContext } from "../../contexts";
-import { OrdersListSkeleton } from "../SkeletonsLoadings";
 import { WorkOrder } from "../../types/commonTypes";
+import { OrdersListSkeleton } from "../skeletonsLoadings";
 
 type OrdersListProps = {
-  orders: WorkOrder[];
+  orders: WorkOrder[] | undefined;
 };
 
 export function OrdersList({ orders }: OrdersListProps) {

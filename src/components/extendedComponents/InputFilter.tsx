@@ -1,11 +1,12 @@
+import { useDebounce } from "react-use";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
-import { useDebounce } from "react-use";
+
 import { useGeneralContext } from "../../contexts";
 import { WorkOrder } from "../../types/commonTypes";
 
 type InputFilterProps = {
-  orders: WorkOrder[];
+  orders: WorkOrder[] | undefined;
 };
 
 export function InputFilter({ orders }: InputFilterProps) {

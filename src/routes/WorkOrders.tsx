@@ -1,12 +1,16 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Divider, Drawer, Skeleton } from "antd";
 import { useEffect, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button, Divider, Drawer, Modal, Skeleton } from "antd";
 
-import { OrderDetails, OrdersList } from "../components/extendedComponents";
-import { useDrawerContext, useGeneralContext } from "../contexts";
-import { useAssetByUnitId, useWorkOrders } from "../hooks/useReactQuery";
+import {
+  useDrawerContext,
+  useGeneralContext,
+  useModalsContext,
+} from "../contexts";
 import { Asset, WorkOrder } from "../types/commonTypes";
+import { useAssetByUnitId, useWorkOrders } from "../hooks/useReactQuery";
+import { OrderDetails, OrdersList } from "../components/extendedComponents";
 
 export function WorkOrders() {
   const {
@@ -14,6 +18,12 @@ export function WorkOrders() {
     handleOpenWorkOrdersListDrawer,
     handleCloseWorkOrdersListDrawer,
   } = useDrawerContext();
+  const {
+    isCreateWorkOrderOpen,
+    handleCloseIsCreateWorkOrderModal,
+    handleOpenIsCreateWorkOrderModal,
+  } = useModalsContext();
+
   const isMobile = useMediaQuery({ maxWidth: 378 });
   const isMediumAndSmallScreen = useMediaQuery({ maxWidth: 768 });
 
@@ -23,44 +33,39 @@ export function WorkOrders() {
     useAssetByUnitId(selectedUnit);
   const { workOrders, isLoading: isWorkOrdersLoading } = useWorkOrders();
 
-  // os ignores são por acusar de undefined mas por conta dos !loadings nunca chegará undefined nesse ponto
   const orders = useMemo(
     () =>
-      !isAssetsLoading &&
-      !isWorkOrdersLoading &&
-      // @ts-ignore
       assetsByUnit
-        // @ts-ignore
-        .map((asset: Asset) =>
-          // @ts-ignore
-          workOrders.find((order: WorkOrder) => order.assetId === asset.id)
+        ?.map((asset: Asset) =>
+          workOrders?.find((order: WorkOrder) => order.assetId === asset.id)
         )
-        .filter((item: WorkOrder) => item !== undefined),
+        .filter((item: WorkOrder | undefined) => item !== undefined),
     [assetsByUnit, workOrders]
   );
 
-  // melhorar esses dois useEffects
   useEffect(() => {
-    if (selectedOrderId === 0 && !isAssetsLoading && !isWorkOrdersLoading) {
+    if (
+      (selectedOrderId === 0 && !isAssetsLoading && !isWorkOrdersLoading) ||
+      oldUnit !== selectedUnit
+    ) {
+      // @ts-ignore
       setSelectedOrderId(orders[0].id);
     }
-  }, [orders]);
-
-  useEffect(() => {
-    if (oldUnit !== selectedUnit) {
-      setSelectedOrderId(orders[0].id);
-    }
-  }, [selectedUnit]);
+  }, [orders, selectedUnit]);
 
   return (
     <div>
       <header className="flex flex-row items-center justify-between w-full">
         <h1 className="text-2xl font-medium max-[425px]:text-lg">
-          Ordens de Serviço
+          Work Orders
         </h1>
-        <Button type="primary" className="bg-blue-500 items-center">
+        <Button
+          type="primary"
+          className="bg-blue-500 items-center"
+          onClick={handleOpenIsCreateWorkOrderModal}
+        >
           <PlusOutlined className="text-sm" />
-          Criar ordem
+          Create Work Order
         </Button>
       </header>
       <Divider
@@ -93,7 +98,10 @@ export function WorkOrders() {
 
         {!isMediumAndSmallScreen && (
           <div>
-            <OrdersList orders={orders} />
+            {
+              // @ts-ignore
+              <OrdersList orders={orders} />
+            }
           </div>
         )}
 
@@ -107,10 +115,21 @@ export function WorkOrders() {
             placement="right"
             width={isMobile ? 320 : 378}
           >
-            <OrdersList orders={orders} />
+            {
+              // @ts-ignore
+              <OrdersList orders={orders} />
+            }
           </Drawer>
         )}
       </div>
+      <Modal
+        title="Create Work Order"
+        open={isCreateWorkOrderOpen}
+        onOk={handleCloseIsCreateWorkOrderModal}
+        onCancel={handleCloseIsCreateWorkOrderModal}
+      >
+        {/* <CreateWorkOrderForm assets={assetsByUnit} users={} /> */}
+      </Modal>
     </div>
   );
 }

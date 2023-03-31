@@ -1,5 +1,4 @@
 import { Checkbox } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Checklist } from "../../types/commonTypes";
 
 type CheckListOrderProps = {

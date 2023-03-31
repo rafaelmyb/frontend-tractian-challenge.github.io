@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { MachineCard } from "../components/basicComponents";
-import { AssetsSkeleton } from "../components/SkeletonsLoadings";
+import { Asset } from "../types/commonTypes";
 import { useGeneralContext } from "../contexts";
 import { useAssetByUnitId } from "../hooks/useReactQuery";
-import { Asset } from "../types/commonTypes";
+import { MachineCard } from "../components/basicComponents";
+import { AssetsSkeleton } from "../components/skeletonsLoadings";
 
 export function Assets() {
   const { selectedUnit, setSelectedAssetId } = useGeneralContext();
@@ -15,11 +15,10 @@ export function Assets() {
       {isLoading ? (
         <AssetsSkeleton isLoading={isLoading} />
       ) : (
-        // @ts-ignore acusa possible undefined mas por conta do isLoading acima, não vai dar undefined
-        assetsByUnit.map((asset: Asset) => (
+        assetsByUnit?.map((asset: Asset) => (
           <Link
             key={asset.id}
-            to={`/ativo/${asset.id}`}
+            to={`/asset/${asset.id}`}
             onClick={() => setSelectedAssetId(asset.id)}
           >
             <MachineCard

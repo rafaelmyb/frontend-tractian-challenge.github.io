@@ -1,21 +1,21 @@
 import { Outlet } from "react-router-dom";
 import { QueryClientProvider } from "react-query";
 
-import Divider from "antd/es/divider";
-import { Layout } from "./Layout";
-import { NavBar } from "./components/extendedComponents";
+import { Layout } from "./layout";
 import { queryClient } from "./services/queryClient";
-import { DrawerProvider, GeneralProvider } from "./contexts";
+import { DrawerProvider, GeneralProvider, ModalsProvider } from "./contexts";
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GeneralProvider>
-        <DrawerProvider>
-          <Layout>
-            <Outlet />
-          </Layout>
-        </DrawerProvider>
+        <ModalsProvider>
+          <DrawerProvider>
+            <Layout>
+              <Outlet />
+            </Layout>
+          </DrawerProvider>
+        </ModalsProvider>
       </GeneralProvider>
     </QueryClientProvider>
   );

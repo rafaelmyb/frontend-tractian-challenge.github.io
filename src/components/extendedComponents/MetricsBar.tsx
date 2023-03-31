@@ -15,9 +15,9 @@ import {
 import { Metrics } from "../../types/commonTypes";
 
 type MetricsBarProps = {
-  metrics: Metrics;
-  healthScore: number;
-  status: string;
+  metrics: Metrics | undefined;
+  healthScore: number | undefined;
+  status: string | undefined;
 };
 
 export function MetricsBar({ metrics, healthScore, status }: MetricsBarProps) {
@@ -26,27 +26,27 @@ export function MetricsBar({ metrics, healthScore, status }: MetricsBarProps) {
       <Card>
         <Metric
           icon={<RiseOutlined className="text-[24px] text-blue-500" />}
-          label="Total de Coletas Uptime (Ligada)"
-          value={metrics.totalCollectsUptime}
+          label="Total Collects Uptime"
+          value={metrics?.totalCollectsUptime}
         />
       </Card>
       <Card>
         <Metric
-          label="Total de Horas de Coletas Uptime (Ligada)"
-          value={`${metrics.totalUptime.toFixed(0)} horas`}
+          label="Total Uptime"
+          value={`${metrics?.totalUptime.toFixed(0)} horas`}
           icon={<HistoryOutlined className="text-[24px] text-blue-500" />}
         />
       </Card>
       <Card>
         <Metric
-          label="Data da Ultima Coleta Uptime (Ligada)"
-          value={dateTimeFormat(metrics.lastUptimeAt, "DD/MM/YYYY HH:mm")}
+          label="Last Uptime At"
+          value={dateTimeFormat(metrics?.lastUptimeAt, "DD/MM/YYYY HH:mm")}
           icon={<CalendarOutlined className="text-[24px] text-blue-500" />}
         />
       </Card>
       <Card>
         <Metric
-          label="Saúde"
+          label="Health"
           value={`${healthScore}%`}
           className="mr-6"
           icon={<HeartOutlined className="text-[24px] text-red-500" />}

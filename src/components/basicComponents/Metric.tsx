@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 type MetricProps = {
   label: string;
   icon?: string | ReactElement;
-  value: number | string;
+  value: number | string | undefined;
   className?: string;
 };
 

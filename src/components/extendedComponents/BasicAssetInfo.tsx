@@ -8,19 +8,21 @@ import {
 } from "@ant-design/icons";
 
 import { Info, InfoExpanded } from "../basicComponents";
-import { useUserById } from "../../hooks/useReactQuery";
+import { User } from "../../types/commonTypes";
 
 type BasicAssetInfoProps = {
-  image: string;
-  model: string;
-  name: string;
-  sensors: string[];
-  specifications: {
-    maxTemp: number;
-    power?: number;
-    rpm?: number | null;
-  };
-  assignedUserIds: number[];
+  image: string | undefined;
+  model: string | undefined;
+  name: string | undefined;
+  sensors: string[] | undefined;
+  specifications:
+    | {
+        maxTemp: number;
+        power?: number;
+        rpm?: number | null;
+      }
+    | undefined;
+  users: User[];
 };
 
 export function BasicAssetInfo({
@@ -29,19 +31,8 @@ export function BasicAssetInfo({
   name,
   sensors,
   specifications,
-  assignedUserIds,
+  users,
 }: BasicAssetInfoProps) {
-  function handleUserId() {
-    const users = assignedUserIds.map((id: number) => {
-      const { user } = useUserById(id);
-      return user;
-    });
-
-    return users;
-  }
-
-  const users = handleUserId();
-
   return (
     <aside className="w-[300px] h-full max-[910px]:w-full">
       <img
@@ -70,7 +61,7 @@ export function BasicAssetInfo({
             }}
           />
         }
-        label="Modelo"
+        label="Model"
         value={model}
       />
       <Info
@@ -81,10 +72,10 @@ export function BasicAssetInfo({
             }}
           />
         }
-        label="Temperatura Limite"
-        value={`${specifications.maxTemp} °C`}
+        label="Max Temperature"
+        value={`${specifications?.maxTemp} °C`}
       />
-      {specifications.power !== undefined && (
+      {specifications?.power !== undefined && (
         <Info
           icon={
             <ThunderboltOutlined
@@ -93,11 +84,11 @@ export function BasicAssetInfo({
               }}
             />
           }
-          label="Força"
+          label="Power"
           value={`${specifications.power} kWh`}
         />
       )}
-      {specifications.rpm && (
+      {specifications?.rpm && (
         <Info
           icon={
             <DashboardOutlined
@@ -106,7 +97,7 @@ export function BasicAssetInfo({
               }}
             />
           }
-          label="Rotações por minuto"
+          label="Rotations per minute"
           value={`${specifications.rpm}RPM`}
         />
       )}
@@ -118,8 +109,8 @@ export function BasicAssetInfo({
             }}
           />
         }
-        label="Responsáveis"
-        value={users ? users : null}
+        label="Responsible"
+        value={users}
       />
     </aside>
   );

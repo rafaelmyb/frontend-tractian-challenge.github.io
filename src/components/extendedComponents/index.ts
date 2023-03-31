@@ -6,3 +6,4 @@ export * from "./OrdersList";
 export * from "./OrderDetails";
 export * from "./ChecklistOrder"
 export * from "./InputFilter"
+export * from "./CreateWorkOrderForm"

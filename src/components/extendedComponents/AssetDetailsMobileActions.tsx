@@ -17,7 +17,7 @@ export function AssetDetailsMobileActions() {
         className="min-[769px]:hidden"
         onClick={handleOpenMetricsDrawer}
       >
-        {isMobile ? "Métricas" : "Métricas do Ativo"}
+        {isMobile ? "Metrics" : "Asset Metrics"}
       </Button>
       <Button
         type="primary"
@@ -25,7 +25,7 @@ export function AssetDetailsMobileActions() {
         className="min-[768px]:ml-auto"
         onClick={handleOpenBasicInfoDrawer}
       >
-        {isMobile ? "Informações" : "Informações do Ativo"}
+        {isMobile ? "Infomartions" : "Asset Information"}
       </Button>
     </div>
   );

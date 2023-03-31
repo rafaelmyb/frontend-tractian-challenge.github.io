@@ -21,19 +21,19 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/ativos",
+        path: "/assets",
         element: <Assets />,
       },
       {
-        path: "/ativo/:id",
+        path: "/asset/:id",
         element: <AssetDetails />,
       },
       {
-        path: "/usuarios",
+        path: "/users",
         element: <Users />,
       },
       {
-        path: "/ordens-de-servico",
+        path: "/workorders",
         element: <WorkOrders />,
       },
     ],

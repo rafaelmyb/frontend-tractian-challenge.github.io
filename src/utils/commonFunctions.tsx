@@ -5,25 +5,25 @@ import {
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 
-export function dateTimeFormat(value: string, format: string) {
+export function dateTimeFormat(value: string | undefined, format: string) {
   const dateTime = dayjs(value).format(format);
   return `${dateTime}h`;
 }
 
-export function statusFormatText(status: string) {
+export function statusFormatText(status: string | undefined) {
   switch (status) {
     case "inAlert":
-      return "Em Alerta";
+      return "In Alert";
     case "inOperation":
-      return "Em Operação";
+      return "In Operation";
     case "inDowntime":
-      return "Em Parada";
+      return "Em Downtime";
     default:
-      return "Processando...";
+      return "Processing...";
   }
 }
 
-export function statusFormatIcon(status: string) {
+export function statusFormatIcon(status: string | undefined) {
   switch (status) {
     case "inAlert":
       return (
@@ -53,11 +53,11 @@ export function statusFormatIcon(status: string) {
         />
       );
     default:
-      return "Processando...";
+      return "Processing...";
   }
 }
 
-export function colorPriorityOrder(priority: string) {
+export function colorPriorityOrder(priority: string | undefined) {
   switch (priority) {
     case "high":
       return "bg-red-500";

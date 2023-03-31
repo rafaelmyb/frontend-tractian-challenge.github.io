@@ -1,10 +1,11 @@
-import { Checkbox, Divider, Skeleton } from "antd";
 import { useEffect, useState } from "react";
-import { useGeneralContext } from "../../contexts";
-import { useWorkOrderById } from "../../hooks/useReactQuery";
-import { apiService } from "../../services/service.api";
+import { Checkbox, Divider, Skeleton } from "antd";
+
 import { User } from "../../types/commonTypes";
-import { OrderDetailsSkeleton } from "../SkeletonsLoadings";
+import { getUserById } from "../../hooks/useApi";
+import { useGeneralContext } from "../../contexts";
+import { OrderDetailsSkeleton } from "../skeletonsLoadings";
+import { useWorkOrderById } from "../../hooks/useReactQuery";
 
 type CheckListItemProps = {
   completed: boolean;
@@ -20,7 +21,7 @@ export function OrderDetails() {
     const users = await Promise.all(
       // @ts-ignore
       workOrder.assignedUserIds.map(async (userId: number) => {
-        const user = await apiService.getUserById(userId);
+        const user = await getUserById(userId);
         return user;
       })
     );
@@ -64,7 +65,7 @@ export function OrderDetails() {
           <Divider type="horizontal" className="mt-6 mb-4 border" />
 
           <div>
-            <h2 className="text-lg mb-2">Responsáveis</h2>
+            <h2 className="text-lg mb-2">Responsible</h2>
             {isLoading ? (
               <Skeleton active={isLoading} />
             ) : (
