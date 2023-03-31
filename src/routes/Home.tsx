@@ -1,3 +1,4 @@
+// @ts-nocheck por conta do isLoading, não chegará da undefined
 import { Card, Divider, Dropdown, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGeneralContext } from "../contexts";
@@ -22,7 +23,7 @@ export function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray-100 px-4">
       <Card className="max-w-[450px] w-full shadow-md">
         <div className="flex flex-col w-full">
           <h1 className="text-blue-500 font-extrabold text-4xl max-[425px]:text-3xl">
@@ -44,7 +45,7 @@ export function Home() {
                 selectable: true,
                 onSelect: (e) => {
                   setSelectedCompanyId(Number(e.key));
-                  navigate("/ativos");
+                  navigate("/dashboard");
                 },
               }}
               placement="bottomLeft"

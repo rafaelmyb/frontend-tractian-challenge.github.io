@@ -61,3 +61,10 @@ export type Company = {
   id: number;
   name: string;
 }
+
+export type ChartProps = {
+  data: {
+    name: string
+    y: number
+  }[] | undefined
+}

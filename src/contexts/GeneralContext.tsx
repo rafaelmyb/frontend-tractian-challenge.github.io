@@ -47,12 +47,12 @@ export function GeneralProvider({ children }: GeneralProviderProps) {
   function handleRedirect() {
     if (oldUnit !== selectedUnit) {
       setOldUnit(selectedUnit);
-      return navigate("/ativos");
+      return navigate("/dashboard");
     }
   }
 
   useEffect(() => {
-    if (pathname !== "/ativos") {
+    if (pathname !== "/dashboard") {
       handleRedirect();
     }
   }, [selectedUnit]);

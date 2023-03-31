@@ -45,7 +45,7 @@ export function Users() {
               <div className="flex flex-col justify-start gap-2">
                 <strong>{user.name}</strong>
                 <strong>{user.email}</strong>
-                <strong>{unit.name}</strong>
+                <strong>{unit?.name}</strong>
               </div>
             </div>
           </Card>

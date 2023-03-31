@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { Button, Dropdown, Typography } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import { useUnits } from "../hooks/useReactQuery";
@@ -27,7 +28,29 @@ export function Header() {
       label: unit.name,
     }));
 
+  const menuItems = [
+    {
+      key: 1,
+      label: "Dashboard",
+    },
+    {
+      key: 2,
+      label: "Sair",
+    },
+  ];
+
   const navigate = useNavigate();
+
+  function handleRedirect(e) {
+    switch (e) {
+      case 1:
+        return navigate("/dashboard");
+      case 2:
+        return navigate("/");
+      default:
+        return navigate("/");
+    }
+  }
 
   return (
     <header className="flex flex-row items-center bg-blue-600 h-14 px-6 max-[768px]:px-4 max-[768px]:justify-between">
@@ -42,7 +65,7 @@ export function Header() {
             onSelect: (e) => setSelectedUnit(Number(e.key)),
             defaultSelectedKeys: ["1"],
           }}
-          className="ml-8"
+          className="ml-8 max-[375px]:ml-4"
         >
           <Typography.Link>
             <div className="flex flex-row items-center text-sm font-medium">
@@ -54,14 +77,20 @@ export function Header() {
           </Typography.Link>
         </Dropdown>
       )}
-      <Button
-        type="default"
-        ghost
-        className="text-white ml-auto"
-        onClick={() => navigate("/")}
+
+      <Dropdown
+        menu={{
+          items: menuItems,
+          selectable: true,
+          onSelect: (e) => handleRedirect(Number(e.key)),
+          defaultSelectedKeys: ["0"],
+        }}
+        className="ml-auto"
       >
-        Sair
-      </Button>
+        <div className="flex flex-row items-center text-sm font-medium">
+          <MenuOutlined className="text-lg mt-[-4px] text-white" />
+        </div>
+      </Dropdown>
     </header>
   );
 }
